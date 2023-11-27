@@ -13,7 +13,7 @@
         WindowStartupLocation="CenterScreen"
         Loaded="Window_Loaded"
         
-        Title="VTS Data Acquisition Application" Height="820" Width="1500" Icon="/logo-101.png">
+        Title="VTS Data Acquisition Application" Height="820" Width="1550" Icon="/logo-101.png">
 
     <Grid>
         <Grid.RowDefinitions>

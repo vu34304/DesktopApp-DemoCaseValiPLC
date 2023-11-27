@@ -12,7 +12,7 @@
              xmlns:viewmodels="clr-namespace:DemoCaseGui.Core.Application.ViewModels;assembly=DemoCaseGui.Core"           
              mc:Ignorable="d" 
              d:DataContext="{d:DesignInstance Type=viewmodels:CaseMicroViewModel}"
-             d:DesignHeight="660" d:DesignWidth="1400"
+             d:DesignHeight="660" d:DesignWidth="1600"
              Background="White">
     <Grid>
         <Grid.ColumnDefinitions>

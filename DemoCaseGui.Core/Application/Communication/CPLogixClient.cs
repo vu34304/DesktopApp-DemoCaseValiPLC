@@ -35,10 +35,17 @@ namespace DemoCaseGui.Core.Application.Communication
             new("led_vang1", "Channel2.Device1.vang1", null, "VANG1", DateTime.Now),
             new("led_vang2", "Channel2.Device1.vang2", null, "VANG2", DateTime.Now),
 
-            //new("set_do1", "PLC.Vali_Micro850.led7", null, "SET_D1", DateTime.Now),
-            //new("set_xanh1", "PLC.Vali_Micro850.led7", null, "SET_X1", DateTime.Now),
-            //new("set_vang1", "PLC.Vali_Micro850.led7", null, "SET_V1", DateTime.Now),
+            new("set_do1", "PLC.Vali_Micro850.led7", null, "SET_D1", DateTime.Now),
+            new("set_xanh1", "PLC.Vali_Micro850.led7", null, "SET_X1", DateTime.Now),
+            new("set_vang1", "PLC.Vali_Micro850.led7", null, "SET_V1", DateTime.Now),
+            //Time
+             new("time_do1_dp", "PLC.Vali_Micro850.led7", null, "D1_HIEN", DateTime.Now),
+            new("time_xanh1_dp", "PLC.Vali_Micro850.led7", null, "X1_HIEN", DateTime.Now),
+            new("time_vang1_dp", "PLC.Vali_Micro850.led7", null, "V1_HIEN", DateTime.Now),
 
+             new("time_do2_dp", "PLC.Vali_Micro850.led7", null, "D2_HIEN", DateTime.Now),
+            new("time_xanh2_dp", "PLC.Vali_Micro850.led7", null, "X2_HIEN", DateTime.Now),
+            new("time_vang2_dp", "PLC.Vali_Micro850.led7", null, "V2_HIEN", DateTime.Now),
             //AUTO MODE
             
 
@@ -82,7 +89,8 @@ namespace DemoCaseGui.Core.Application.Communication
             foreach (var tag in Tags)
             {
 
-                if (tag.name is "ugt_524" or "ki6000" or "05d_150" or "rpv_510" or "speed" or "motor_sp")
+                if (tag.name is "ugt_524" or "ki6000" or "05d_150" or "rpv_510" or "speed" or "motor_sp" or "set_do1" or "set_xanh1" or "set_vang1" or "time_do1_dp" or "time_vang1_dp"
+                    or "time_xanh1_dp" or "time_do2_dp" or "time_vang2_dp" or "time_xanh2_dp" )
                 {
                     OperateResult<UInt16> data = plc.ReadUInt16(tag.address);
 

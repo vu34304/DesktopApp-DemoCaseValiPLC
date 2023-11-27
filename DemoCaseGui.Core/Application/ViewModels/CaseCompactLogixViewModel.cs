@@ -50,6 +50,20 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
         public bool? do1, do2, xanh1, xanh2, vang1, vang2;
 
+        public ushort? SET_D1 { get; set; }
+        public ushort? SET_V1 { get; set; }
+        public ushort? SET_X1 { get; set; }
+        public ushort? set_d1_old, set_v1_old, set_x1_old;
+
+        public ushort? Display_D1 { get; set; }
+        public ushort? Display_V1 { get; set; }
+        public ushort? Display_X1 { get; set; }
+        public ushort? display_d1_old, display_v1_old, display_x1_old;
+        public ushort? Display_D2 { get; set; }
+        public ushort? Display_V2 { get; set; }
+        public ushort? Display_X2 { get; set; }
+        public ushort? display_d2_old, display_v2_old, display_x2_old;
+
         //AUTO MODE
         public ushort? TIME_DO1_AUTO { get; set; }
         public ushort? TIME_DO2_AUTO { get; set; }
@@ -119,6 +133,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ICommand Stop_Inverter_Command { get; set; }
         public ICommand Forward_Inverter_Command { get; set; }
         public ICommand Write_Setpoint_Command { get; set; }
+        public ICommand Write_TimeTrafficLights_Command { get; set; }
 
         public CaseCompactLogixViewModel()
         {
@@ -135,7 +150,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             Stop_Inverter_Command = new RelayCommand(Inverter_Stop);
             Forward_Inverter_Command = new RelayCommand(Inverter_Forward);
             Write_Setpoint_Command = new RelayCommand(WriteSetpoint);
-
+            Write_TimeTrafficLights_Command = new RelayCommand(Set_TrafficLights);
             //var mapper = Mappers.Xy<MeasureModel>()
             //   .X(model => model.DateTime.Ticks)   //use DateTime.Ticks as X
             //   .Y(model => model.Value);           //use the value property as Y
@@ -154,7 +169,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
             //AxisUnit = TimeSpan.TicksPerSecond;
 
             //SetAxisLimits(DateTime.Now);
-            
+
         }
 
         private void _timer_Elapsed(object? sender, System.Timers.ElapsedEventArgs e)
@@ -248,6 +263,62 @@ namespace DemoCaseGui.Core.Application.ViewModels
             vang2 = (bool?)_CPLogixClient.GetTagValue("led_vang2");
 
 
+            if ((ushort?)_CPLogixClient.GetTagValue("set_do1") != set_d1_old)
+            {
+                SET_D1 = (ushort?)_CPLogixClient.GetTagValue("set_do1");
+            }
+            set_d1_old = (ushort?)_CPLogixClient.GetTagValue("set_do1");
+
+
+            if ((ushort?)_CPLogixClient.GetTagValue("set_xanh1") != set_x1_old)
+            {
+                SET_X1 = (ushort?)_CPLogixClient.GetTagValue("set_xanh1");
+            }
+            set_x1_old = (ushort?)_CPLogixClient.GetTagValue("set_xanh1");
+
+
+            if ((ushort?)_CPLogixClient.GetTagValue("set_vang1") != set_v1_old)
+            {
+                SET_V1 = (ushort?)_CPLogixClient.GetTagValue("set_vang1");
+            }
+            set_v1_old = (ushort?)_CPLogixClient.GetTagValue("set_vang1");
+
+            if ((ushort?)_CPLogixClient.GetTagValue("time_do1_dp") != display_d1_old)
+            {
+                Display_D1 = (ushort?)_CPLogixClient.GetTagValue("time_do1_dp");
+            }
+            display_d1_old = (ushort?)_CPLogixClient.GetTagValue("time_do1_dp");
+
+            if ((ushort?)_CPLogixClient.GetTagValue("time_do2_dp") != display_d2_old)
+            {
+                Display_D2 = (ushort?)_CPLogixClient.GetTagValue("time_do2_dp");
+            }
+            display_d2_old = (ushort?)_CPLogixClient.GetTagValue("time_do2_dp");
+
+            if ((ushort?)_CPLogixClient.GetTagValue("time_vang1_dp") != display_v1_old)
+            {
+                Display_V1 = (ushort?)_CPLogixClient.GetTagValue("time_vang1_dp");
+            }
+            display_v1_old = (ushort?)_CPLogixClient.GetTagValue("time_vang1_dp");
+
+            if ((ushort?)_CPLogixClient.GetTagValue("time_vang2_dp") != display_v2_old)
+            {
+                Display_V2 = (ushort?)_CPLogixClient.GetTagValue("time_vang2_dp");
+            }
+            display_v2_old = (ushort?)_CPLogixClient.GetTagValue("time_vang2_dp");
+
+
+            if ((ushort?)_CPLogixClient.GetTagValue("time_xanh1_dp") != display_x1_old)
+            {
+                Display_X1 = (ushort?)_CPLogixClient.GetTagValue("time_xanh1_dp");
+            }
+            display_x1_old = (ushort?)_CPLogixClient.GetTagValue("time_xanh1_dp");
+
+            if ((ushort?)_CPLogixClient.GetTagValue("time_xanh2_dp") != display_x2_old)
+            {
+                Display_X2 = (ushort?)_CPLogixClient.GetTagValue("time_xanh2_dp");
+            }
+            display_x2_old = (ushort?)_CPLogixClient.GetTagValue("time_xanh2_dp");
             //SENSOR
 
             if ((ushort?)_CPLogixClient.GetTagValue("ugt_524") != device_ugt_524)
@@ -495,7 +566,12 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _CPLogixClient.WriteNumberPLC("SPEED_INVERTER", MotorsetpointWrite);
            
         }
-
+        public void Set_TrafficLights()
+        {
+            _CPLogixClient.WriteNumberPLC("SET_D1",(int)SET_D1);           
+            _CPLogixClient.WriteNumberPLC("SET_X1", (int)SET_X1);
+            _CPLogixClient.WriteNumberPLC("SET_V1", (int)SET_V1);
+        }
 
     }
 }
