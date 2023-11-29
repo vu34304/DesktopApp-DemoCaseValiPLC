@@ -344,20 +344,20 @@ Margin="10">
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="400"/>
+                                    <ColumnDefinition Width="auto"/>
                                 </Grid.ColumnDefinitions>
-                                <Grid Grid.Column="0" Width="400" Height="300" >
+                                <Grid Grid.Column="0" Width="600" Height="300" >
                                     <Image 
-Width="500"           
+Width="600"           
 VerticalAlignment="Center"
 HorizontalAlignment="Left"     
-Margin="-70,-10,0,0"
+Margin="-90,-10,0,0"
 Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\NGA4 (1).png"/>
                                     <Border 
   Height="35"                         
   HorizontalAlignment="Left"
   VerticalAlignment="Bottom"
-  Margin="40,0,0,100"
+  Margin="65,0,0,95"
   Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -377,7 +377,7 @@ Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1
 Height="35"                         
 HorizontalAlignment="Right"
 VerticalAlignment="Top"
-Margin="0,85,105,0"
+Margin="0,85,270,0"
 Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -396,7 +396,7 @@ Style="{StaticResource Frame}">
   Width="35"
   HorizontalAlignment="Left"
   VerticalAlignment="Top"
-  Margin="105,20,0,0"
+  Margin="130,20,0,0"
   Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -409,14 +409,26 @@ Style="{StaticResource Frame}">
             State="{Binding XANH2, Mode=TwoWay}"/>
 
                                             </StackPanel>
-
+                                            
                                         </StackPanel>
+                                    </Border>
+                                    <Border Margin="85 80 0 0" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                        <TextBlock Text="{Binding Display_2, Mode=TwoWay}"   Style="{StaticResource FieldTitle}" FontWeight="Normal" />
+                                    </Border>
+                                    <Border Margin="120 0 0 50" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding Display_1, Mode=TwoWay}"  Style="{StaticResource FieldTitle}" FontWeight="Normal" />
+                                    </Border>
+                                    <Border Margin="0 40 330 0" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Top">
+                                        <TextBlock Text="{Binding Display_1, Mode=TwoWay}"   Style="{StaticResource FieldTitle}" FontWeight="Normal" />
+                                    </Border>
+                                    <Border Margin="0 0 290 90" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
+                                        <TextBlock Text="{Binding Display_2, Mode=TwoWay}"   Style="{StaticResource FieldTitle}" FontWeight="Normal" />
                                     </Border>
                                     <Border     
 Width="35"
 HorizontalAlignment="Right"
 VerticalAlignment="Bottom"
-Margin="0,0,170,35"
+Margin="0,0,335,30"
 Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -527,102 +539,34 @@ Style="{StaticResource Frame}">
                                         </Grid>
 
                                     </Border>
-                                    <Grid      Grid.Row="1">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                        </Grid.ColumnDefinitions>
-                                        <Border Style="{StaticResource Frame}"
-                                                    Width="110" 
-                                                    Margin="10"
-                                                    Grid.Column="0"
-                                                    Height="90">
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="auto"/>
-                                                    <ColumnDefinition Width="auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-
-                                                <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Text="Red A:" Style="{StaticResource FieldTitle}" Margin="5 5 0 0" />
-                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Display_D1, Mode=TwoWay}" Margin="10 0 0 0"  Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                                <TextBlock Grid.Column="2" Grid.Row="0" Margin="0 0 10 0" Text=" (s)" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-
-                                                <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Text="Green A:" Style="{StaticResource FieldTitle}" Margin="5 5 0 0" />
-                                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Display_X1, Mode=TwoWay}"  Margin="10 0 0 0" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                                <TextBlock Grid.Column="2" Grid.Row="1" Margin="0 0 10 0" Text=" (s)" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-
-                                                <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Text="Yellow A:" Style="{StaticResource FieldTitle}" Margin="5 5 0 0" />
-                                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Display_V1, Mode=TwoWay}" Margin="10 0 0 0"  Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                                <TextBlock Grid.Column="2" Grid.Row="2" Margin="0 0 10 0" Text=" (s)" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                            </Grid>
-                                        </Border>
-                                        <Border Margin="10"   
-                                                    Width="110" 
-                                                    Height="90" 
-                                                    Grid.Column="1"
-                                                    Style="{StaticResource Frame}"  >
-
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="*"/>
-                                                    <ColumnDefinition Width="auto"/>
-                                                    <ColumnDefinition Width="auto"/>
-                                                </Grid.ColumnDefinitions>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                    <RowDefinition/>
-                                                </Grid.RowDefinitions>
-
-                                                <TextBlock Grid.Column="0" Grid.Row="0" HorizontalAlignment="Left" Text="Red B:" Style="{StaticResource FieldTitle}" Margin="5 5 0 0" />
-                                                <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Display_D2, Mode=TwoWay}" Margin="10 0 0 0"  Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                                <TextBlock Grid.Column="2" Grid.Row="0" Margin="0 0 10 0" Text=" (s)" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-
-                                                <TextBlock Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Text="Green B:" Style="{StaticResource FieldTitle}" Margin="5 5 0 0" />
-                                                <TextBlock Grid.Column="1" Grid.Row="1" Text="{Binding Display_X2, Mode=TwoWay}"  Margin="10 0 0 0" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                                <TextBlock Grid.Column="2" Grid.Row="1" Margin="0 0 10 0" Text=" (s)" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-
-                                                <TextBlock Grid.Column="0" Grid.Row="2" HorizontalAlignment="Left" Text="Yellow B:" Style="{StaticResource FieldTitle}" Margin="5 5 0 0" />
-                                                <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding Display_V2, Mode=TwoWay}" Margin="10 0 0 0"  Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                                <TextBlock Grid.Column="2" Grid.Row="2" Margin="0 0 10 0" Text=" (s)" Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                            </Grid>
-                                        </Border>
-                                        <Border Width="110"
+                                    <Border Width="110" 
                                                 Height="90"
-                                                     Grid.Column="2"
+                                                     Grid.Row="1"
                                                 Style="{StaticResource Frame}"
                               
 
 Margin="10">
-                                            <StackPanel Orientation="Vertical" >
-                                                <TextBlock Text="Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="10"/>
-                                                
-                                                <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <Button Margin="5 0" Content="ON" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
-                                                        <i:Interaction.Triggers>
-                                                            <i:EventTrigger EventName="Click">
-                                                                <prism:InvokeCommandAction Command="{Binding Start_Manual_Command}" />
-                                                            </i:EventTrigger>
-                                                        </i:Interaction.Triggers>
-                                                    </Button>
-                                                    <Button Margin="5 0" Content="OFF" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
-                                                        <i:Interaction.Triggers>
-                                                            <i:EventTrigger EventName="Click">
-                                                                <prism:InvokeCommandAction Command="{Binding Stop_Manual_Command}" />
-                                                            </i:EventTrigger>
-                                                        </i:Interaction.Triggers>
-                                                    </Button>
-                                                </StackPanel>
+                                        <StackPanel Orientation="Vertical" >
+                                            <TextBlock Text="Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="10"/>
+
+                                            <StackPanel Margin="10" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <Button Margin="5 0" Content="ON" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding Start_Manual_Command}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Margin="5 0" Content="OFF" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding Stop_Manual_Command}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
                                             </StackPanel>
-                                        </Border>
-                                    </Grid>
+                                        </StackPanel>
+                                    </Border>
                                 </Grid>
                             </Grid>
 

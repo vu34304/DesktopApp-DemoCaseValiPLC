@@ -64,6 +64,9 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ushort? Display_X2 { get; set; }
         public ushort? display_d2_old, display_v2_old, display_x2_old;
 
+        public ushort? Display_1 { get; set; }
+        public ushort? Display_2 { get; set; }
+
         //AUTO MODE
         public ushort? TIME_DO1_AUTO { get; set; }
         public ushort? TIME_DO2_AUTO { get; set; }
@@ -319,6 +322,29 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 Display_X2 = (ushort?)_CPLogixClient.GetTagValue("time_xanh2_dp");
             }
             display_x2_old = (ushort?)_CPLogixClient.GetTagValue("time_xanh2_dp");
+
+            if(Display_D1 != 0)
+            {
+                Display_1 = Display_D1;
+            }
+            else
+            {
+                if (Display_X1 != 0) Display_1 = Display_X1;              
+                else Display_1 = Display_V1;
+            }
+
+            if (Display_D2 != 0)
+            {
+                Display_2 = Display_D2;
+            }
+            else
+            {
+                if (Display_X2 != 0) Display_2 = Display_X2;
+                else Display_2 = Display_V2;
+            }
+
+
+
             //SENSOR
 
             if ((ushort?)_CPLogixClient.GetTagValue("ugt_524") != device_ugt_524)
