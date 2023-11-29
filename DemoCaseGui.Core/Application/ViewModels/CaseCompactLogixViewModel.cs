@@ -323,26 +323,12 @@ namespace DemoCaseGui.Core.Application.ViewModels
             }
             display_x2_old = (ushort?)_CPLogixClient.GetTagValue("time_xanh2_dp");
 
-            if(Display_D1 != 0)
-            {
-                Display_1 = Display_D1;
-            }
-            else
-            {
-                if (Display_X1 != 0) Display_1 = Display_X1;              
-                else Display_1 = Display_V1;
-            }
-
-            if (Display_D2 != 0)
-            {
-                Display_2 = Display_D2;
-            }
-            else
-            {
-                if (Display_X2 != 0) Display_2 = Display_X2;
-                else Display_2 = Display_V2;
-            }
-
+            if (DO1 == true) Display_1 = Display_D1;
+            if (DO2 == true) Display_2 = Display_D2;
+            if (VANG1 == true) Display_1 = Display_V1;
+            if (VANG2 == true) Display_2 = Display_V2;
+            if (XANH1 == true) Display_1 = Display_X1;
+            if (XANH2 == true) Display_1 = Display_X2;
 
 
             //SENSOR
