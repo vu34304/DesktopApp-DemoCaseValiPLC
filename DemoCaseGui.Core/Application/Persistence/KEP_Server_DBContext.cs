@@ -16,7 +16,9 @@ public partial class KEP_Server_DBContext : DbContext
     public virtual DbSet<InverterLog> InverterLogs { get; set; } = null!;
     public virtual DbSet<ValiIfmLog> ValiIfmLogs { get; set; } = null!;
     public virtual DbSet<ValiSiemensLog> ValiSiemensLogs { get; set; } = null!;
+    public virtual DbSet<StepMotorLog> StepMotorLogs { get; set; } = null!;
     public virtual DbSet<ValiMicroLog> ValiMicroLogs { get; set; } = null!;
+    public virtual DbSet<ValiMicro820Log> ValiMicro820Logs { get; set; } = null!;
     public virtual DbSet<ValiCompactLog> ValiCompactLogs { get; set; } = null!;
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -142,6 +144,57 @@ public partial class KEP_Server_DBContext : DbContext
                 .IsUnicode(false)
                 .HasColumnName("_VALUE");
         });
+
+        modelBuilder.Entity<ValiMicro820Log>(entity =>
+        {
+            entity.ToTable("ValiMicro820_LOG");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+
+            entity.Property(e => e.Name)
+                .HasMaxLength(64)
+                .IsUnicode(false)
+                .HasColumnName("_NAME");
+
+            entity.Property(e => e.Numericid).HasColumnName("_NUMERICID");
+
+            entity.Property(e => e.Quality).HasColumnName("_QUALITY");
+
+            entity.Property(e => e.Timestamp)
+                .HasColumnType("datetime")
+                .HasColumnName("_TIMESTAMP");
+
+            entity.Property(e => e.Value)
+                .HasMaxLength(64)
+                .IsUnicode(false)
+                .HasColumnName("_VALUE");
+        });
+
+        modelBuilder.Entity<StepMotorLog>(entity =>
+        {
+            entity.ToTable("StepMotor_LOG");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+
+            entity.Property(e => e.Name)
+                .HasMaxLength(64)
+                .IsUnicode(false)
+                .HasColumnName("_NAME");
+
+            entity.Property(e => e.Numericid).HasColumnName("_NUMERICID");
+
+            entity.Property(e => e.Quality).HasColumnName("_QUALITY");
+
+            entity.Property(e => e.Timestamp)
+                .HasColumnType("datetime")
+                .HasColumnName("_TIMESTAMP");
+
+            entity.Property(e => e.Value)
+                .HasMaxLength(64)
+                .IsUnicode(false)
+                .HasColumnName("_VALUE");
+        });
+
 
         modelBuilder.Entity<ValiSiemensLog>(entity =>
         {

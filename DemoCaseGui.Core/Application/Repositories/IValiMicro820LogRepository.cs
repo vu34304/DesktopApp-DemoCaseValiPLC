@@ -8,8 +8,8 @@ using System.Threading.Tasks;
 
 namespace DemoCaseGui.Core.Application.Repositories
 {
-    public interface IInverterLogRepository
+    public interface IValiMicro820LogRepository
     {
-        Task<IEnumerable<InverterLog>> GetListAsync(TimeRangeQuery query, string name);
+        Task<IEnumerable<ValiMicro820Log>> GetListAsync(TimeRangeQuery query, string name);
     }
 }

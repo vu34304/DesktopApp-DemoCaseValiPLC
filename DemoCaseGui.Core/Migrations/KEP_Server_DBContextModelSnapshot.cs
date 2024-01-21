@@ -174,7 +174,43 @@ namespace DemoCaseGui.Core.Migrations
 
                     b.ToTable("ValiMicro_LOG", (string)null);
                 });
+            modelBuilder.Entity("DemoCaseGui.Core.Application.Models.ValiMicro820Log", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasColumnName("id");
 
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<string>("Name")
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnType("varchar(64)")
+                    .HasColumnName("_NAME");
+
+                b.Property<int?>("Numericid")
+                    .HasColumnType("int")
+                    .HasColumnName("_NUMERICID");
+
+                b.Property<int?>("Quality")
+                    .HasColumnType("int")
+                    .HasColumnName("_QUALITY");
+
+                b.Property<DateTime>("Timestamp")
+                    .HasColumnType("datetime")
+                    .HasColumnName("_TIMESTAMP");
+
+                b.Property<string>("Value")
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnType("varchar(64)")
+                    .HasColumnName("_VALUE");
+
+                b.HasKey("Id");
+
+                b.ToTable("ValiMicro820_LOG", (string)null);
+            });
             modelBuilder.Entity("DemoCaseGui.Core.Application.Models.ValiSiemensLog", b =>
                 {
                     b.Property<int>("Id")
@@ -212,6 +248,44 @@ namespace DemoCaseGui.Core.Migrations
 
                     b.ToTable("ValiSiemens_LOG", (string)null);
                 });
+            modelBuilder.Entity("DemoCaseGui.Core.Application.Models.StepMotorLog", b =>
+            {
+                b.Property<int>("Id")
+                    .ValueGeneratedOnAdd()
+                    .HasColumnType("int")
+                    .HasColumnName("id");
+
+                SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                b.Property<string>("Name")
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnType("varchar(64)")
+                    .HasColumnName("_NAME");
+
+                b.Property<int?>("Numericid")
+                    .HasColumnType("int")
+                    .HasColumnName("_NUMERICID");
+
+                b.Property<int?>("Quality")
+                    .HasColumnType("int")
+                    .HasColumnName("_QUALITY");
+
+                b.Property<DateTime>("Timestamp")
+                    .HasColumnType("datetime")
+                    .HasColumnName("_TIMESTAMP");
+
+                b.Property<string>("Value")
+                    .HasMaxLength(64)
+                    .IsUnicode(false)
+                    .HasColumnType("varchar(64)")
+                    .HasColumnName("_VALUE");
+
+                b.HasKey("Id");
+
+                b.ToTable("StepMotor_LOG", (string)null);
+            });
+
 #pragma warning restore 612, 618
         }
     }

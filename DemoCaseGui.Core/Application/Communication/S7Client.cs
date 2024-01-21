@@ -21,7 +21,7 @@ public class S7Client
         _timer.Elapsed += TimerElapsed;
         Tags = new()
         {
-            //light and DC motor
+            //Vali_IFM
    
             new("controlGreen", "PLC.Vali_IFM.controlGreen" ,null, "DB2.DBX16.0", DateTime.Now),
             new("controlRed", "PLC.Vali_IFM.controlRed", null, "DB2.DBX16.2",  DateTime.Now),
@@ -32,7 +32,6 @@ public class S7Client
             new("ledYellow", "PLC.Vali_IFM.ledYellow", null, "DB2.DBX0.6",  DateTime.Now),
             new("DCMotor", "PLC.Vali_IFM.DCmotor", null, "DB2.DBX0.7",  DateTime.Now),
 
-            //sensor
             new("angleRB3100", "PLC.Vali_IFM.angleRB3100", null, "DB2.DBD2",  DateTime.Now),
             new("countRB3100", "PLC.Vali_IFM.countRB3100", null, "DB2.DBW6",  DateTime.Now),
             new("tempTW2000", "PLC.Vali_IFM.tempTW2000", null, "DB2.DBD8",  DateTime.Now),
@@ -41,7 +40,7 @@ public class S7Client
             new("statusO5C500", "PLC.Vali_IFM.statusO5C500", null, "DB2.DBX14.3", DateTime.Now),
             new("statusUGT524", "PLC.Vali_IFM.statusUGT524", null, "DB2.DBX14.0", DateTime.Now),
             new("distanceUGT524", "PLC.Vali_IFM.distanceUGT524", null, "DB2.DBW12", DateTime.Now),
-            new("resolutionRB3100", "PLC.Vali_IFM.resolutionRB3100", null, "DB8.DBW20", DateTime.Now),
+            new("resolutionRB3100", "PLC.Vali_IFM.RB3100_reSLT", null, "DB8.DBW20", DateTime.Now),
 
             //inverter 
             new("VFD_Start", "PLC.Inverter.VFD_Start", null, "DB4.DBX6.0", DateTime.Now),
@@ -52,36 +51,53 @@ public class S7Client
             new("speed", "PLC.Inverter.VFD_Speed_PV", null, "DB4.DBW2", DateTime.Now),
 
             //TempVar
-            new("statusInverter", "PLC.Inverter.statusInverter", null, "DB4.DBX10.0", DateTime.Now),
-            new("directionForward", "PLC.Inverter.directionForward", null, "DB4.DBX10.1", DateTime.Now),
-            new("directionReverse", "PLC.Inverter.directionReverse", null, "DB4.DBX10.2", DateTime.Now),
+            new("statusInverter", "PLC.Inverter.VFD_Run", null, "DB4.DBX10.0", DateTime.Now),
+            new("directionForward", "PLC.Inverter.VFD_Status_Forward", null, "DB4.DBX10.1", DateTime.Now),
+            new("directionReverse", "PLC.Inverter.VFD_Status_Reverse", null, "DB4.DBX10.2", DateTime.Now),
 
             
 
 
-            //Siemens Demo Case
-            new("mode_M", "PLC.Vali_Siemens.mode", null, "DB8.DBX0.0", DateTime.Now),
-            new("reset_M", "PLC.Vali_Siemens.reset", null, "DB8.DBX0.1", DateTime.Now),
-            new("start_M", "PLC.Vali_Siemens.start", null, "DB8.DBX0.2", DateTime.Now),
-            new("forward_M", "PLC.Vali_Siemens.forward", null, "DB8.DBX0.3", DateTime.Now),
-            new("backward_M", "PLC.Vali_Siemens.backward", null, "DB8.DBX0.4", DateTime.Now),
-            new("home_M", "PLC.Vali_Siemens.setHome", null, "DB8.DBX0.5", DateTime.Now),
+            //Vali_Siemens
+            //new("mode_M", "PLC.Vali_Siemens.mode", null, "DB8.DBX0.0", DateTime.Now),
+            //new("reset_M", "PLC.Vali_Siemens.reset", null, "DB8.DBX0.1", DateTime.Now),
+            //new("start_M", "PLC.Vali_Siemens.start", null, "DB8.DBX0.2", DateTime.Now),
+            //new("forward_M", "PLC.Vali_Siemens.forward", null, "DB8.DBX0.3", DateTime.Now),
+            //new("backward_M", "PLC.Vali_Siemens.backward", null, "DB8.DBX0.4", DateTime.Now),
+            //new("home_M", "PLC.Vali_Siemens.setHome", null, "DB8.DBX0.5", DateTime.Now),
             new("temp_led6", "PLC.Vali_Siemens.temp6", null, "DB8.DBX0.6", DateTime.Now),
             new("temp_led7", "PLC.Vali_Siemens.temp7", null, "DB8.DBX0.7", DateTime.Now),
-            new("setpoint_speed_M", "PLC.Vali_Siemens.setpointSpeed", null, "DB8.DBD4", DateTime.Now),
-            new("setpoint_position_M", "PLC.Vali_Siemens.setpointPosition", null, "DB8.DBD8", DateTime.Now),
+            new("setpoint_speed_M", "PLC.Vali_Siemens.Speed_SP", null, "DB8.DBD4", DateTime.Now),
+            new("setpoint_position_M", "PLC.Vali_Siemens.Position_SP", null, "DB8.DBD8", DateTime.Now),
+            new("current_speed_M", "PLC.Vali_Siemens.Speed_PV", null, "DB8.DBD12", DateTime.Now),
+            new("current_position_M", "PLC.Vali_Siemens.Position_PV", null, "DB8.DBD16", DateTime.Now),
+            //Step Motor
             //
-            new("led0", "PLC.Vali_Siemens.led0", null, "DB8.DBX2.0", DateTime.Now),
-            new("led1", "PLC.Vali_Siemens.led1", null, "DB8.DBX2.1", DateTime.Now),
-            new("led2", "PLC.Vali_Siemens.led2", null, "DB8.DBX2.2", DateTime.Now),
-            new("led3", "PLC.Vali_Siemens.led3", null, "DB8.DBX2.3", DateTime.Now),
-            new("led4", "PLC.Vali_Siemens.led4", null, "DB8.DBX2.4", DateTime.Now),
-            new("led5", "PLC.Vali_Siemens.led5", null, "DB8.DBX2.5", DateTime.Now),
-            new("led6", "PLC.Vali_Siemens.led6", null, "DB8.DBX2.6", DateTime.Now),
-            new("led7", "PLC.Vali_Siemens.led7", null, "DB8.DBX2.7", DateTime.Now),
-            new("current_speed_M", "PLC.Vali_Siemens.currentSpeed", null, "DB8.DBD12", DateTime.Now),
-            new("current_position_M", "PLC.Vali_Siemens.currentPosition", null, "DB8.DBD16", DateTime.Now)
+            new("led0", "PLC.Vali_Siemens.led1", null, "DB8.DBX2.0", DateTime.Now),
+            new("led1", "PLC.Vali_Siemens.led2", null, "DB8.DBX2.1", DateTime.Now),
+            new("led2", "PLC.Vali_Siemens.led3", null, "DB8.DBX2.2", DateTime.Now),
+            new("led3", "PLC.Vali_Siemens.led4", null, "DB8.DBX2.3", DateTime.Now),
+            new("led4", "PLC.Vali_Siemens.led5", null, "DB8.DBX2.4", DateTime.Now),
+            new("led5", "PLC.Vali_Siemens.led6", null, "DB8.DBX2.5", DateTime.Now),
+            new("led6", "PLC.Vali_Siemens.led7", null, "DB8.DBX2.6", DateTime.Now),
+            new("led7", "PLC.Vali_Siemens.led8", null, "DB8.DBX2.7", DateTime.Now),
 
+            new("toggle1", "PLC.Vali_Siemens.toggle1", null, "DB8.DBX0.0", DateTime.Now),
+            new("toggle2", "PLC.Vali_Siemens.toggle2", null, "DB8.DBX0.1", DateTime.Now),
+            new("toggle3", "PLC.Vali_Siemens.toggle3", null, "DB8.DBX0.2", DateTime.Now),
+            new("toggle4", "PLC.Vali_Siemens.toggle4", null, "DB8.DBX0.3", DateTime.Now),
+            new("toggle5", "PLC.Vali_Siemens.toggle5", null, "DB8.DBX0.4", DateTime.Now),
+            new("toggle6", "PLC.Vali_Siemens.toggle6", null, "DB8.DBX0.5", DateTime.Now),
+            new("toggle7", "PLC.Vali_Siemens.toggle7", null, "DB8.DBX0.6", DateTime.Now),
+            new("toggle8", "PLC.Vali_Siemens.toggle8", null, "DB8.DBX0.7", DateTime.Now),
+
+            new("auto/man", "PLC.Step_Motor.Auto/Man", null, "DB2.DBX2.0", DateTime.Now),
+            new("foward", "PLC.Step_Motor.Forward", null, "DB2.DBX38.3", DateTime.Now),
+            new("position", "PLC.Step_Motor.Position_Int", null, "DB2.DBW40", DateTime.Now),
+            new("reset_encoder", "PLC.Step_Motor.Reset_Encoder", null, "DB2.DBX38.1", DateTime.Now),
+            new("reverse", "PLC.Step_Motor.Reverse", null, "DB2.DBX38.4", DateTime.Now),
+            new("sethome", "PLC.Step_Motor.SetHome", null, "DB2.DBX38.5", DateTime.Now),
+            new("start", "PLC.Step_Motor.Start", null, "DB2.DBX38.2", DateTime.Now),
 
         };
         

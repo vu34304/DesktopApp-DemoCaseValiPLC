@@ -31,6 +31,20 @@ namespace DemoCaseGui
             InitializeComponent();
             DataContext = new Core.Application.ViewModels.CaseCompactLogixViewModel();          
         }
-       
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Indicator_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Indicator_Loaded_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

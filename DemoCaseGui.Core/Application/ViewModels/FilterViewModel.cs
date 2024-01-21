@@ -18,11 +18,15 @@ namespace DemoCaseGui.Core.Application.ViewModels
         private readonly S7Client _s7Client;
         private readonly M850Client _m850Client;
         private readonly CPLogixClient _CPLogixClient;
+
         private readonly ValiIfmLogRepository valiIfmLogRepository;
         private readonly InverterLogRepository inverterLogRepository;
         private readonly ValiSiemensLogRepository valiSiemensLogRepository;
+        private readonly StepMotorLogRepository stepMotorLogRepository;
         private readonly ValiMicroLogRepository valiMicroLogRepository;
+        private readonly ValiMicro820LogRepository valiMicro820LogRepository;
         private readonly ValiCompactLogRepository valiCompactLogRepository;
+
         private readonly IExcelExporter _excelExporter;
 
         public ObservableCollection<FilterEntry> Entries { get; set; } = new();
@@ -76,7 +80,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 }
                 if (Mode == "Station 2")
                 {
-                    var tag = _m850Client.Tags.First(i => i.dbname == tagname);
+                    var tag = _m850Client.Tags2.Concat(_m850Client.Tags).First(i => i.dbname == tagname);
                 }
                 if (Mode == "Station 3")
                 {
@@ -117,7 +121,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
                   "Station 3"
             };
             Tagnames = new ObservableCollection<string>(_s7Client.Tags.Select(i => i.dbname).OrderBy(s => s));
-            Tagnames1 = new ObservableCollection<string>(_m850Client.Tags.Select(i => i.dbname).OrderBy(s => s));
+            Tagnames1 = new ObservableCollection<string>(_m850Client.Tags2.Concat(_m850Client.Tags).Select(i => i.dbname).OrderBy(s => s));
             Tagnames2 = new ObservableCollection<string>(_CPLogixClient.Tags.Select(i => i.dbname).OrderBy(s => s));
 
             FilterCommand = new RelayCommand(LoadAsync);
@@ -131,7 +135,9 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 var valiIfmLog = await valiIfmLogRepository.GetListAsync(TimeRange, Tagname);
                 var inverterLog = await inverterLogRepository.GetListAsync(TimeRange, Tagname);
                 var valiSiemensLog = await valiSiemensLogRepository.GetListAsync(TimeRange, Tagname);
+                var stepMotorLog = await stepMotorLogRepository.GetListAsync(TimeRange, Tagname);
                 var valiMicroLog = await valiMicroLogRepository.GetListAsync(TimeRange, Tagname);
+                var valiMicro820Log = await valiMicro820LogRepository.GetListAsync(TimeRange, Tagname);
                 var valiCompactLogs = await valiCompactLogRepository.GetListAsync(TimeRange, Tagname);
 
                 var entriesvaliIfmLog = valiIfmLog.Select(e => new FilterEntry(
@@ -149,7 +155,17 @@ namespace DemoCaseGui.Core.Application.ViewModels
                     e.Timestamp,
                     e.Value)).ToList();
 
+                var entriesstepMotorLog = stepMotorLog.Select(e => new FilterEntry(
+                  e.Name,
+                  e.Timestamp,
+                  e.Value)).ToList();
+
                 var entriesvaliMicroLog = valiMicroLog.Select(e => new FilterEntry(
+                   e.Name,
+                   e.Timestamp,
+                   e.Value)).ToList();
+
+                var entriesvaliMicro820Log = valiMicro820Log.Select(e => new FilterEntry(
                    e.Name,
                    e.Timestamp,
                    e.Value)).ToList();
@@ -173,11 +189,18 @@ namespace DemoCaseGui.Core.Application.ViewModels
                 {
                     filters.Add(entry);
                 }
+                foreach (var entry in entriesstepMotorLog)
+                {
+                    filters.Add(entry);
+                }
                 foreach (var entry in entriesvaliMicroLog)
                 {
                     filters.Add(entry);
                 }
-
+                foreach (var entry in entriesvaliMicro820Log)
+                {
+                    filters.Add(entry);
+                }
                 foreach (var entry in entriesvaliCompactLog)
                 {
                     filters.Add(entry);

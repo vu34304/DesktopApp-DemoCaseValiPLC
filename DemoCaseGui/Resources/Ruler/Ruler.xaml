@@ -1,0 +1,271 @@
+﻿<UserControl x:Class="DemoCaseGui.Resources.Ruler.Ruler"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DemoCaseGui.Resources.Ruler"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Viewbox Stretch="Uniform" Width="64" Height="64" ToolTip="Scale from 0 to 120 (style 1)" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:s="clr-namespace:System;assembly=mscorlib">
+            <Viewbox.Tag>
+                <s:Int64>1168070144</s:Int64>
+            </Viewbox.Tag>
+            <Canvas Tag="#00000000,#FF008000,Original,0,None" LayoutTransform="Identity" Width="119" Height="200">
+                <TextBlock Text="7"  Foreground="Black" FontSize="50" Canvas.Left="115" Canvas.Top="928" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="8"  Foreground="Black" FontSize="50" Canvas.Left="115" Canvas.Top="858" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+
+                </TextBlock>
+                <TextBlock Text="9"  Foreground="Black" FontSize="50" Canvas.Left="115" Canvas.Top="780" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="10"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="699" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="11"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="622" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="12"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="537" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="13"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="460" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="14"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="390" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+
+                </TextBlock>
+                <TextBlock Text="15"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="304" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="16"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="227" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="17"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="143" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="18"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="68" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <TextBlock Text="19"  Foreground="Black" FontSize="50" Canvas.Left="105" Canvas.Top="-8" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBlock.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform Angle="-90"/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </TextBlock.RenderTransform>
+                </TextBlock>
+                <Polyline Points="28,829 43,829" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,907 43,907" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,845 43,845" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,923 43,923" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,861 43,861" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,939 43,939" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,877 43,877" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,955 43,955" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,892 91,892" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,970 91,970" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,822 43,822" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,900 43,900" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,837 43,837" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,915 43,915" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,853 59,853" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,931 59,931" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,869 28,869" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,947 28,947" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,884 43,884" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,962 43,962" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,28 91,28" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,814 91,814" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,43 43,43" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,121 43,121" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,200 43,200" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,278 43,278" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,357 43,357" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,436 43,436" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,514 43,514" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,593 43,593" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,671 43,671" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,750 43,750" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,59 43,59" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,137 43,137" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,216 43,216" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,294 43,294" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,373 43,373" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,451 43,451" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,530 43,530" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,608 43,608" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,687 43,687" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,765 43,765" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,75 43,75" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,153 43,153" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,231 43,231" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,310 43,310" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,388 43,388" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,467 43,467" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,545 43,545" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,624 43,624" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,703 43,703" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,781 43,781" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,91 43,91" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,169 43,169" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,247 43,247" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,326 43,326" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,404 43,404" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,483 43,483" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,561 43,561" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,640 43,640" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,718 43,718" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,797 43,797" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,106 91,106" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,184 91,184" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,263 91,263" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,341 91,341" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,420 91,420" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,498 91,498" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,577 91,577" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,655 91,655" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,734 91,734" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,36 43,36" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,114 43,114" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,192 43,192" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,271 43,271" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,349 43,349" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,428 43,428" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,506 43,506" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,585 43,585" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,663 43,663" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,742 43,742" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,51 43,51" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,129 43,129" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,208 43,208" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,286 43,286" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,365 43,365" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,443 43,443" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,522 43,522" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,600 43,600" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,679 43,679" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,758 43,758" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,67 59,67" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,145 59,145" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,223 59,223" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,302 59,302" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,381 59,381" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,459 59,459" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,538 59,538" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,616 59,616" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,695 59,695" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,773 59,773" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,83 28,83" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,161 28,161" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,239 28,239" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,318 28,318" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,396 28,396" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,475 28,475" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,553 28,553" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,632 28,632" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,710 28,710" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="43,789 28,789" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,98 43,98" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,176 43,176" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,255 43,255" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,333 43,333" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,412 43,412" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,491 43,491" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,569 43,569" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,648 43,648" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,726 43,726" Stroke="#FF000000" StrokeThickness="6" />
+                <Polyline Points="28,805 43,805" Stroke="#FF000000" StrokeThickness="6" />
+            </Canvas>
+        </Viewbox>
+    </Grid>
+</UserControl>

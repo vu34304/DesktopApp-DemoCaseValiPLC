@@ -75,4 +75,19 @@
     <ProjectReference Include="..\DemoCaseGui.Core\DemoCaseGui.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="NetToolKit">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Software Toolbox\Symbol Factory 3\NetToolKit.dll</HintPath>
+    </Reference>
+    <Reference Include="RibbonControlsLibrary">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Software Toolbox\Symbol Factory 3\RibbonControlsLibrary.dll</HintPath>
+    </Reference>
+    <Reference Include="SF3Engine">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Software Toolbox\Symbol Factory 3\SF3Engine.dll</HintPath>
+    </Reference>
+    <Reference Include="SKCLNET">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Software Toolbox\Symbol Factory 3\SKCLNET.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

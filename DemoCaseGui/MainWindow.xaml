@@ -10,10 +10,10 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:components="clr-namespace:DemoCaseGui.Resources.Components" 
         xmlns:i="http://schemas.microsoft.com/xaml/behaviors" 
-        WindowStartupLocation="CenterScreen"
+        ResizeMode="CanMinimize"
         Loaded="Window_Loaded"
-        
-        Title="VTS Data Acquisition Application" Height="820" Width="1550" Icon="/logo-101.png">
+        WindowStartupLocation="CenterScreen"
+        Title="VTS Data Acquisition Application" Height="945" Width="1700" Icon="/logo-101.png">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -45,7 +45,7 @@
                         Content="Station 1"
                         Padding="5"/>
                 </TabItem.Header>
-                <local:CaseView/>
+                <local:CaseView Loaded="CaseView_Loaded_2"/>
             </TabItem>
 
            

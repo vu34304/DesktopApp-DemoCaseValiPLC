@@ -8,6 +8,8 @@ using Timer = System.Timers.Timer;
 using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using Microsoft.Extensions.DependencyInjection;
+using NPOI.SS.UserModel;
 
 namespace DemoCaseGui.Core.Application.ViewModels
 {
@@ -15,10 +17,17 @@ namespace DemoCaseGui.Core.Application.ViewModels
     {
         private readonly CPLogixClient _CPLogixClient;
         private readonly Timer _timer;
-      
-        //private double _axisMax;
-        //private double _axisMin;
-        //private double _trend;
+
+        private double _axisMax;
+        private double _axisMin;
+        private double _trend;
+
+        //Status Inverter
+        public bool? Active { get; set; }
+        public bool? Ready { get; set; }
+        public bool? Fwd { get; set; }
+        public bool? Rev { get; set; }
+        public bool? Error { get; set; }
         //IO
         public bool? I0_0 { get; set; }
         public bool? I0_1 { get; set; }
@@ -154,24 +163,24 @@ namespace DemoCaseGui.Core.Application.ViewModels
             Forward_Inverter_Command = new RelayCommand(Inverter_Forward);
             Write_Setpoint_Command = new RelayCommand(WriteSetpoint);
             Write_TimeTrafficLights_Command = new RelayCommand(Set_TrafficLights);
-            //var mapper = Mappers.Xy<MeasureModel>()
-            //   .X(model => model.DateTime.Ticks)   //use DateTime.Ticks as X
-            //   .Y(model => model.Value);           //use the value property as Y
-            //Charting.For<MeasureModel>(mapper);
+            var mapper = Mappers.Xy<MeasureModel>()
+               .X(model => model.DateTime.Ticks)   //use DateTime.Ticks as X
+               .Y(model => model.Value);           //use the value property as Y
+            Charting.For<MeasureModel>(mapper);
 
-            ////the values property will store our values array
-            //ChartValues = new ChartValues<MeasureModel>();
+            //the values property will store our values array
+            ChartValues = new ChartValues<MeasureModel>();
 
-            ////lets set how to display the X Labels
-            //DateTimeFormatter = value => new DateTime((long)value).ToString("hh:mm:ss");
+            //lets set how to display the X Labels
+            DateTimeFormatter = value => new DateTime((long)value).ToString("hh:mm:ss");
 
-            ////AxisStep forces the distance between each separator in the X axis
-            //AxisStep = TimeSpan.FromSeconds(1).Ticks;
-            ////AxisUnit forces lets the axis know that we are plotting seconds
-            ////this is not always necessary, but it can prevent wrong labeling
-            //AxisUnit = TimeSpan.TicksPerSecond;
+            //AxisStep forces the distance between each separator in the X axis
+            AxisStep = TimeSpan.FromSeconds(1).Ticks;
+            //AxisUnit forces lets the axis know that we are plotting seconds
+            //this is not always necessary, but it can prevent wrong labeling
+            AxisUnit = TimeSpan.TicksPerSecond;
 
-            //SetAxisLimits(DateTime.Now);
+            SetAxisLimits(DateTime.Now);
 
         }
 
@@ -330,7 +339,6 @@ namespace DemoCaseGui.Core.Application.ViewModels
             if (XANH1 == true) Display_1 = Display_X1;
             if (XANH2 == true) Display_1 = Display_X2;
 
-
             //SENSOR
 
             if ((ushort?)_CPLogixClient.GetTagValue("ugt_524") != device_ugt_524)
@@ -427,21 +435,20 @@ namespace DemoCaseGui.Core.Application.ViewModels
             if ((ushort?)_CPLogixClient.GetTagValue("speed") != speed_old)
             {
                 Speed = (ushort?)_CPLogixClient.GetTagValue("speed");
-                //var now = DateTime.Now;
+                var now = DateTime.Now;
 
-                //Random random = new Random();
-                //ChartValues.Add(new MeasureModel
-                //{
-                //    DateTime = now,
-                //    Value = 7,
-                //}) ;
+                ChartValues.Add(new MeasureModel
+                {
+                    DateTime = now,
+                    Value = Convert.ToDouble(Speed)
+                }) ;
 
-                //SetAxisLimits(now);
+                SetAxisLimits(now);
 
-                //if (ChartValues.Count() > 150)
-                //{
-                //    ChartValues.RemoveAt(0);
-                //}
+                if (ChartValues.Count() > 150)
+                {
+                    ChartValues.RemoveAt(0);
+                }
 
             }
             speed_old = (ushort?)_CPLogixClient.GetTagValue("speed");
@@ -477,44 +484,48 @@ namespace DemoCaseGui.Core.Application.ViewModels
                     Direction = false;
             }
 
-
-
+            //Status Inverter
+            Active = (bool?)_CPLogixClient.GetTagValue("status_inverter");
+            Ready = (bool?)_CPLogixClient.GetTagValue("motor_ready");
+            Fwd = (bool?)_CPLogixClient.GetTagValue("direction_status_inverter");
+            Rev = !Fwd;
+            Error = (bool?)_CPLogixClient.GetTagValue("motor_error");
         }
 
-        //public ChartValues<MeasureModel> ChartValues { get; set; }
-        //public Func<double, string> DateTimeFormatter { get; set; }
-        //public double AxisStep { get; set; }
-        //public double AxisUnit { get; set; }
-        //public double AxisMax
-        //{
-        //    get { return _axisMax; }
-        //    set
-        //    {
-        //        _axisMax = value;
-        //        OnPropertyChanged("AxisMax");
-        //    }
-        //}
-        //public double AxisMin
-        //{
-        //    get { return _axisMin; }
-        //    set
-        //    {
-        //        _axisMin = value;
-        //        OnPropertyChanged("AxisMin");
-        //    }
-        //}
-        //private void SetAxisLimits(DateTime now)
-        //{
-        //    AxisMax = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 1 second ahead
-        //    AxisMin = now.Ticks - TimeSpan.FromSeconds(8).Ticks; // and 8 seconds behind
-        //}
-        //public event PropertyChangedEventHandler PropertyChanged;
+        public ChartValues<MeasureModel> ChartValues { get; set; }
+        public Func<double, string> DateTimeFormatter { get; set; }
+        public double AxisStep { get; set; }
+        public double AxisUnit { get; set; }
+        public double AxisMax
+        {
+            get { return _axisMax; }
+            set
+            {
+                _axisMax = value;
+                OnPropertyChanged("AxisMax");
+            }
+        }
+        public double AxisMin
+        {
+            get { return _axisMin; }
+            set
+            {
+                _axisMin = value;
+                OnPropertyChanged("AxisMin");
+            }
+        }
+        private void SetAxisLimits(DateTime now)
+        {
+            AxisMax = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 1 second ahead
+            AxisMin = now.Ticks - TimeSpan.FromSeconds(8).Ticks; // and 8 seconds behind
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
 
-        //protected virtual void OnPropertyChanged(string propertyName = null)
-        //{
-        //    if (PropertyChanged != null)
-        //        PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        //}
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public void Connect()
         {

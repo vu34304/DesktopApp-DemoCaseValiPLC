@@ -23,7 +23,7 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
         
-        
+
     }
 
     private void CaseView_Loaded(object sender, RoutedEventArgs e)
@@ -44,5 +44,10 @@ public partial class MainWindow : Window
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
        
+    }
+
+    private void CaseView_Loaded_2(object sender, RoutedEventArgs e)
+    {
+
     }
 }

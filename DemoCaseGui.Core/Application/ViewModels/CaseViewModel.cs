@@ -10,16 +10,27 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Timer = System.Timers.Timer;
 using MqttClient = DemoCaseGui.Core.Application.Communication.MqttClient;
+using LiveCharts.Configurations;
+using LiveCharts;
+using DemoCaseGui.Core.Application.Models;
+using System.ComponentModel;
 
 namespace DemoCaseGui.Core.Application.ViewModels
 {
-    public class CaseViewModel : BaseViewModel
+    public class CaseViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private readonly S7Client _s7Client;
         private readonly MqttClient _mqttClient;
         private readonly Timer _timer;
         public bool IsConnected => _s7Client.IsConnected;
         public bool IsMqttConnected => _mqttClient.IsConnected;
+        
+
+        public ChartValues<double> Value { get; set; }
+        public event Action? ChartUpdate;
+        private double _axisMax;
+        private double _axisMin;
+        private double _trend;
 
         public bool? ledGreen_old, ledRed_old, ledYellow_old, dCMotor_old, statusIF6123_old, statusKT5112_old, statusO5C500_old, statusUGT524_old;
         public float? angleRB3100_old, tempTW2000_old;
@@ -53,14 +64,14 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ushort? MotorSpeed { get; set; }
 
         //Siemens Demo Case 
-        public bool? SiemensMode { get; set; }
-        public bool? SiemensReset { get; set; }
-        public bool? SiemensStart { get; set; }
-        public bool? SiemensForward { get; set; }
-        public bool? SiemensBackward { get; set; }
-        public bool? SiemensHome { get; set; }
-        public bool? SiemensLed6 { get; set; }
-        public bool? SiemensLed7 { get; set; }
+        public bool? Toggle1 { get; set; }
+        public bool? Toggle2 { get; set; }
+        public bool? Toggle3 { get; set; }
+        public bool? Toggle4 { get; set; }
+        public bool? Toggle5 { get; set; }
+        public bool? Toggle6 { get; set; }
+        public bool? Toggle7 { get; set; }
+        public bool? Toggle8 { get; set; }
         public float SetpointSpeed { get; set; } = 0;
         public float SetpointPosition { get; set; } = 0;
         //
@@ -90,6 +101,9 @@ namespace DemoCaseGui.Core.Application.ViewModels
         public ICommand FWDInverter { get; set; }
         public ICommand REVInverter { get; set; }
 
+        public ICommand FWDStepMotor { get; set; }
+        public ICommand BACKFWDStepMotor { get; set; }
+
 
         public CaseViewModel()
         {
@@ -110,10 +124,69 @@ namespace DemoCaseGui.Core.Application.ViewModels
             StopInverter = new RelayCommand(StopInverter1);
             FWDInverter = new RelayCommand(FWD);
             REVInverter = new RelayCommand(REV);
+            FWDStepMotor = new RelayCommand(FWD_StepMotor);
+            BACKFWDStepMotor = new RelayCommand(BACKFWD_StepMotor);
+            var mapper = Mappers.Xy<MeasureModel>()
+                .X(model => model.DateTime.Ticks)   //use DateTime.Ticks as X
+                .Y(model => model.Value);           //use the value property as Y
+            Charting.For<MeasureModel>(mapper);
+
+            //the values property will store our values array
+            ChartValues = new ChartValues<MeasureModel>();
+
+            //lets set how to display the X Labels
+            DateTimeFormatter = value => new DateTime((long)value).ToString("hh:mm:ss");
+
+            //AxisStep forces the distance between each separator in the X axis
+            AxisStep = TimeSpan.FromSeconds(1).Ticks;
+            //AxisUnit forces lets the axis know that we are plotting seconds
+            //this is not always necessary, but it can prevent wrong labeling
+            AxisUnit = TimeSpan.TicksPerSecond;
+
+            SetAxisLimits(DateTime.Now);
+
+            //The next code simulates data changes every 300 ms
 
         }
+        public ChartValues<MeasureModel> ChartValues { get; set; }
+        public Func<double, string> DateTimeFormatter { get; set; }
+        public double AxisStep { get; set; }
+        public double AxisUnit { get; set; }
+        public double AxisMax
+        {
+            get { return _axisMax; }
+            set
+            {
+                _axisMax = value;
+                OnPropertyChanged("AxisMax");
+            }
+        }
+        public double AxisMin
+        {
+            get { return _axisMin; }
+            set
+            {
+                _axisMin = value;
+                OnPropertyChanged("AxisMin");
+            }
+        }
 
-    private async void TimerElapsed(object? sender, EventArgs args)
+
+
+
+        public void SetAxisLimits(DateTime now)
+        {
+            AxisMax = now.Ticks + TimeSpan.FromSeconds(1).Ticks; // lets force the axis to be 1 second ahead
+            AxisMin = now.Ticks - TimeSpan.FromSeconds(8).Ticks; // and 8 seconds behind
+        }
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName = null)
+        {
+            if (PropertyChanged != null)
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        private async void TimerElapsed(object? sender, EventArgs args)
         {
             //light and DC motor
             if ((bool?)_s7Client.GetTagValue("ledGreen") != ledGreen_old)
@@ -212,19 +285,34 @@ namespace DemoCaseGui.Core.Application.ViewModels
             if ((ushort?)_s7Client.GetTagValue("speed") != speed_old)
             {
                 MotorSpeed = (ushort?)_s7Client.GetTagValue("speed");
+                if (ChartValues.Count() < 150)
+                {
+
+                    var now = DateTime.Now;
+
+
+                    ChartValues.Add(new MeasureModel
+                    {
+                        DateTime = now,
+                        Value = Math.Round((float)_s7Client.GetTagValue("speed"), 2)
+                    }) ;
+                    ChartUpdate?.Invoke();
+                    SetAxisLimits(now);
+                }
+                else ChartValues.RemoveAt(0);
                 await _mqttClient.Publish("VTSauto/AR_project/Desktop_pub/speed", JsonConvert.SerializeObject(_s7Client.GetTag("speed")), true);
             }
             speed_old = (ushort?)_s7Client.GetTagValue("speed");
 
             //Siemens Demo Case
-            SiemensMode = (bool?)_s7Client.GetTagValue("mode_M");
-            SiemensReset = (bool?)_s7Client.GetTagValue("reset_M");
-            SiemensStart = (bool?)_s7Client.GetTagValue("start_M");
-            SiemensForward = (bool?)_s7Client.GetTagValue("forward_M");
-            SiemensBackward = (bool?)_s7Client.GetTagValue("backward_M");
-            SiemensHome = (bool?)_s7Client.GetTagValue("home_M");
-            SiemensLed6 = (bool?)_s7Client.GetTagValue("temp_led6");
-            SiemensLed7 = (bool?)_s7Client.GetTagValue("temp_led7");
+            Toggle1 = (bool?)_s7Client.GetTagValue("toggle1");
+            Toggle2 = (bool?)_s7Client.GetTagValue("toggle2");
+            Toggle3 = (bool?)_s7Client.GetTagValue("toggle3");
+            Toggle4 = (bool?)_s7Client.GetTagValue("toggle4");
+            Toggle5 = (bool?)_s7Client.GetTagValue("toggle5");
+            Toggle6 = (bool?)_s7Client.GetTagValue("toggle6");
+            Toggle7 = (bool?)_s7Client.GetTagValue("toggle7");
+            Toggle8 = (bool?)_s7Client.GetTagValue("toggle8");
 
             Led0 = (bool?)_s7Client.GetTagValue("led0");
             Led1 = (bool?)_s7Client.GetTagValue("led1");
@@ -392,6 +480,20 @@ namespace DemoCaseGui.Core.Application.ViewModels
             _s7Client.WritePLC("DB4.DBX6.3", true);
             Thread.Sleep(1000);
             _s7Client.WritePLC("DB4.DBX6.3", false);
+        }
+
+        public void FWD_StepMotor()
+        {
+            _s7Client.WritePLC(_s7Client.GetTagAddress("foward"), true);
+            Thread.Sleep(1000);
+            _s7Client.WritePLC(_s7Client.GetTagAddress("foward"), false);
+        }
+
+        public void BACKFWD_StepMotor()
+        {
+            _s7Client.WritePLC(_s7Client.GetTagAddress("reverse"), true);
+            Thread.Sleep(1000);
+            _s7Client.WritePLC(_s7Client.GetTagAddress("reverse"), false);
         }
     }
 }

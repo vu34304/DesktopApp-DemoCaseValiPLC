@@ -11,8 +11,9 @@
              xmlns:prism="http://prismlibrary.com/" 
              xmlns:viewmodels="clr-namespace:DemoCaseGui.Core.Application.ViewModels;assembly=DemoCaseGui.Core"           
              mc:Ignorable="d" 
+             Loaded="UserControl_Loaded"
              d:DataContext="{d:DesignInstance Type=viewmodels:CaseMicroViewModel}"
-             d:DesignHeight="660" d:DesignWidth="1600"
+             d:DesignHeight="660" d:DesignWidth="1700"
              Background="White">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -266,204 +267,9 @@ Margin="10">
                 <Grid >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-
-                    <Grid Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="auto"/>
-                            <ColumnDefinition Width="*"/>
-
-                        </Grid.ColumnDefinitions>
-
-
-
-                        <materialDesign:Card Grid.Column="1"  
-                                             Margin="10 ">
-
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="AUTO"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-                                <TextBlock Grid.Row="0"
-                               Text="ĐỒ THỊ BIỂU DIỄN TỐC ĐỘ ĐỘNG CƠ"
-                               Style="{StaticResource ModuleTitle}"
-                               HorizontalAlignment="Center"
-                               VerticalAlignment="Center"/>
-                                <!--<Grid Grid.Row="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="349*"/>
-                                        <ColumnDefinition Width="252*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"></RowDefinition>
-                                        <RowDefinition Height="*"></RowDefinition>
-                                    </Grid.RowDefinitions>
-                                    <TextBlock>                                    
-    <TextBlock Name="X"></TextBlock>
-    <TextBlock Name="Y"></TextBlock>
-</TextBlock>
-                                    <lvc:CartesianChart Grid.Row="1" Name="Chart" Zoom="Xy" Grid.ColumnSpan="2" Loaded="Chart_Loaded">
-                                        <lvc:CartesianChart.AxisX>
-                                            <lvc:Axis RangeChanged="Axis_OnRangeChanged" 
-                                            RangeChangedCommand="{Binding RangeChangedCommand}"/>
-                                        </lvc:CartesianChart.AxisX>
-                                        <lvc:CartesianChart.Series>
-                                            <lvc:LineSeries Values="{Binding Value}"                              
-                                              Fill="Transparent" StrokeThickness="2" 
-                                              Panel.ZIndex="2" PointGeometrySize="3"/>
-                                        </lvc:CartesianChart.Series>
-                                    </lvc:CartesianChart>
-
-
-                                </Grid>-->
-
-                                <lvc:CartesianChart Grid.Row="1" AnimationsSpeed="0:0:0.5" Hoverable="False" DataTooltip="{x:Null}">
-                                    <lvc:CartesianChart.Series>
-                                        <lvc:LineSeries Values="{Binding ChartValues}" 
-                         PointGeometry="{x:Null}" 
-                         LineSmoothness="1"
-                         StrokeThickness="6" 
-                         Stroke="#F34336"
-                         Fill="Transparent"/>
-                                    </lvc:CartesianChart.Series>
-                                    <lvc:CartesianChart.AxisX>
-                                        <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
-                   MaxValue="{Binding AxisMax}" 
-                   MinValue="{Binding AxisMin}"
-                   Unit="{Binding AxisUnit}">
-                                            <lvc:Axis.Separator>
-                                                <lvc:Separator Step="{Binding AxisStep}" />
-                                            </lvc:Axis.Separator>
-                                        </lvc:Axis>
-                                    </lvc:CartesianChart.AxisX>
-                                </lvc:CartesianChart>
-
-                            </Grid>
-                        </materialDesign:Card>
-                    </Grid>
-
-                    <materialDesign:Card Grid.Row="2" Padding="10" Margin="10">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
-                Text="Inverter Kit" 
-                Style="{StaticResource ModuleTitle}"/>
-
-                            <StackPanel Orientation="Horizontal" Grid.Row="1"
-                 HorizontalAlignment="Center">
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-                         Padding="5"
-                         Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="120">
-                                        <TextBlock Text="Motor Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <components:Indicator Width="23" Height="23" Margin="5" 
-                                                   State="{Binding ButtonStartup, Mode=TwoWay}"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
-                                                   State="{Binding ButtonStop, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                                            <Button Margin="5 0" Content="ON" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding StartInverterCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
-                                            <Button Margin="5 0" Content="OFF" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding StopInverterCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-                         Padding="5"
-                         Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="120">
-                                        <TextBlock Text="Motor Direction" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <components:Indicator Width="23" Height="23" Margin="5 5 13 5" OnColor="Yellow" 
-                                                   State="{Binding MotorForward, Mode=TwoWay}"/>
-                                            <components:Indicator Width="23" Height="23" Margin="13 5 5 5" OnColor="Yellow" 
-                                                   State="{Binding MotorReverse, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Forward" HorizontalAlignment="Center" Margin="5"/>
-                                            <TextBlock Text="Reverse" HorizontalAlignment="Center" Margin="5"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                                            <Button Margin="5 0" Content="FWD" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding ForwardCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
-                                            <Button Margin="5 0" Content="REV" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding ReverseCommand}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-                         Padding="5"
-                         Width="120"                                                   
-                         Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <!--<TextBlock Text="Motor" Style="{StaticResource FieldTitle}"/>-->
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <!--<StackPanel Margin="0,0,10,0">
-                                                <TextBlock Text="Write Setpoint" HorizontalAlignment="Center"/>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBox Margin="5 0" Width="30" TextAlignment="Center" Text="{Binding MotorSetpointWrite, Mode=TwoWay}" HorizontalAlignment="Center"/>
-                                                    <Button Margin="5 0" Content="OK" Padding="0" Width="35" Height="20">
-                                                        <i:Interaction.Triggers>
-                                                            <i:EventTrigger EventName="Click">
-                                                                <prism:InvokeCommandAction Command="{Binding MotorSetpointOKCommand}" />
-                                                            </i:EventTrigger>
-                                                        </i:Interaction.Triggers>
-                                                    </Button>
-                                                </StackPanel>
-                                            </StackPanel>-->
-                                            <StackPanel Margin="10,0,0,0">
-                                                <TextBlock Text="Read Setpoint :" FontWeight="Bold"  HorizontalAlignment="Center"/>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding MotorSetpoint, Mode=TwoWay}" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text=" RPM"/>
-                                                </StackPanel>
-                                            </StackPanel>
-                                        </StackPanel>
-
-
-
-                                        <TextBlock Text="Speed :" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding MotorSpeed, Mode=TwoWay}" HorizontalAlignment="Center"/>
-                                            <TextBlock Text=" RPM"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                            </StackPanel>
-                        </Grid>
-                    </materialDesign:Card>
-
                     <materialDesign:Card Grid.Row="0" Padding="10" Margin="10">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -539,6 +345,147 @@ Margin="10">
                                 </Border>
                             </Grid>
                             
+                        </Grid>
+                    </materialDesign:Card>
+                    <TextBlock Grid.Row="1" Margin="10" Text="INVERTER" Style="{StaticResource ModuleTitle}"/>
+                    <materialDesign:Card Grid.Row="2">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0">
+
+                               
+                                <Border Height="230" 
+              Width="230" 
+              Grid.Row="1" 
+              Style="{StaticResource Frame}"
+              Padding="5"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left"
+              Margin="10"
+              >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="CONTROL" Style="{StaticResource FieldTitle}"/>
+                                        <Grid Grid.Row="1" Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0"
+                              >
+                                                <Button Margin="5" Content="START" Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding StartInverterCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Margin="5" Content="STOP" Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding StopInverterCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Margin="5" Content="FWD" Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding ForwardCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Margin="5" Content="REV" Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding ReverseCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding ButtonStartup, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="On" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding ButtonStop, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Off" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding MotorForward, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Fwd" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding MotorReverse, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Rev" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                            </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Row="2" Margin="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Speed SP" Margin="10 10 10 0" HorizontalAlignment="Left"/>
+                                            <StackPanel Grid.Column="1" Margin="10 10 10 0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding MotorSetpoint, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text=" Hz"/>
+                                            </StackPanel>
+                                            <TextBlock Text="Speed PV"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10 10 10 0" />
+                                            <StackPanel Margin="10 10 10 0"  Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding MotorSpeed, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text=" Hz"/>
+                                            </StackPanel>
+                                            <!--<TextBlock Grid.Column="0" Grid.Row="2" Margin="10 10 10 0"  Text="Write Setpoint" HorizontalAlignment="Left"/>
+                                            <StackPanel Grid.Column="1" Grid.Row="2" Margin="10 10 10 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBox Margin="5 0" Width="30" TextAlignment="Center" Text="{Binding MotorSetpointWrite, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                                <Button Margin="5 0" Content="OK" Padding="0" Width="35" Height="20">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding MotorSetpointOKCommand}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                            </StackPanel>-->
+                                        </Grid>
+                                    </Grid>
+                                </Border>
+                            </Grid>
+
+                            <Grid Grid.Column="1" Height="400">
+                                <lvc:CartesianChart x:Name="chart" Grid.Row="1" AnimationsSpeed="0:0:0.5" Hoverable="False" DataTooltip="{x:Null}" >
+                                    <lvc:CartesianChart.Series>
+                                        <lvc:LineSeries Values="{Binding ChartValues}" 
+      PointGeometry="{x:Null}" 
+      LineSmoothness="1"
+      StrokeThickness="6" 
+      Stroke="#F34336"
+      Fill="Transparent"/>
+                                    </lvc:CartesianChart.Series>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
+MaxValue="{Binding AxisMax}" 
+MinValue="{Binding AxisMin}"
+Unit="{Binding AxisUnit}">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator Step="{Binding AxisStep}" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+                            </Grid>
                         </Grid>
                     </materialDesign:Card>
                 </Grid>

@@ -29,8 +29,9 @@ namespace DemoCaseGui.Core.Application.ViewModels
         private readonly MqttClient _mqttClient;
         private readonly Timer _timer;
         public bool IsMqttConnected => _mqttClient.IsConnected;
-        public ChartValues<double> Value { get; set; }
 
+        public ChartValues<double> Value { get; set; }
+        public event Action? ChartUpdate;
         private double _axisMax;
         private double _axisMin;
         private double _trend;
@@ -287,51 +288,20 @@ namespace DemoCaseGui.Core.Application.ViewModels
 
             //Inverter
 
-            if ((bool?)_Micro850Client.GetTagValue("start_inverter") != start_old)
-            {
-                Start = (bool?)_Micro850Client.GetTagValue("start_inverter");
-            }
-            start_old = (bool?)_Micro850Client.GetTagValue("stop_inverter");
-            if (Start is true)
-            {
-                ButtonStartup = true;
-                ButtonStop = false;
-            }
-
-
-            if ((bool?)_Micro850Client.GetTagValue("stop_inverter") != stop_old)
-            {
-                Stop = (bool?)_Micro850Client.GetTagValue("stop_inverter");
-
-            }
-            if (Stop is true)
-            {
-                ButtonStartup = false;
-                ButtonStop = true;
-            }
-            stop_old = (bool?)_Micro850Client.GetTagValue("stop_inverter");
-
-            if ((bool?)_Micro850Client.GetTagValue("forward") != forward_old)
-            {
-                MotorForward1 = (bool?)_Micro850Client.GetTagValue("forward");
-                if (MotorForward1 is true)
-                {
-                    MotorForward = true;
-                    MotorReverse = false;
-                }
-            }
-            forward_old = (bool?)_Micro850Client.GetTagValue("forward");
-
-            if ((bool?)_Micro850Client.GetTagValue("reverse") != reverse_old)
-            {
-                MotorReverse1 = (bool?)_Micro850Client.GetTagValue("reverse");
-                if (MotorReverse1 is true)
-                {
-                    MotorForward = false;
-                    MotorReverse = true;
-                }
-            }
-            reverse_old = (bool?)_Micro850Client.GetTagValue("reverse");
+            //if ((bool?)_Micro850Client.GetTagValue("start_inverter") != start_old)
+            //{
+            //    Start = (bool?)_Micro850Client.GetTagValue("start_inverter");
+            //}
+            //start_old = (bool?)_Micro850Client.GetTagValue("stop_inverter");
+            //if (Start is true)
+            //{
+            //    ButtonStartup = true;
+            //    ButtonStop = false;
+            //}
+            ButtonStartup = (bool?)_Micro850Client.GetTagValue("inverter_active");
+            ButtonStop = (bool?)_Micro850Client.GetTagValue("inverter_error");
+            MotorForward = (bool?)_Micro850Client.GetTagValue("inverter_fwd_status");
+            MotorReverse = (bool?)_Micro850Client.GetTagValue("inverter_rev_status");
 
             if ((ushort?)_Micro850Client.GetTagValue("setpoint") != setpoint_old)
             {
@@ -355,6 +325,7 @@ namespace DemoCaseGui.Core.Application.ViewModels
                         Value = MotorSpeed1
                     });
 
+                    ChartUpdate?.Invoke();
                     SetAxisLimits(now);
                 }
                 else ChartValues.RemoveAt(0);

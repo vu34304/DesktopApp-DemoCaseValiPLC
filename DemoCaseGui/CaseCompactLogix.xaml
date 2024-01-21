@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="DemoCaseGui.CaseCompactLogix"
+﻿<UserControl
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -10,9 +10,11 @@
              xmlns:prism="http://prismlibrary.com/" 
              xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
              xmlns:viewmodels="clr-namespace:DemoCaseGui.Core.Application.ViewModels;assembly=DemoCaseGui.Core"        
+             xmlns:Ruler="clr-namespace:DemoCaseGui.Resources.Ruler" x:Class="DemoCaseGui.CaseCompactLogix"        
              mc:Ignorable="d" 
-             d:DataContext="{d:DesignInstance Type=viewmodels:CaseCompactLogixViewModel}"
-             d:DesignHeight="660" d:DesignWidth="1550"
+             Loaded="UserControl_Loaded"
+             d:DataContext="{d:DesignInstance Type={x:Type viewmodels:CaseCompactLogixViewModel}}"
+             d:DesignHeight="820" d:DesignWidth="1700"
              Background="White">
     <Grid>
         <Grid.RowDefinitions>
@@ -20,13 +22,12 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Margin="10" IsEnabled="{Binding IsConnected}" FontSize="24" Height="39.5">
+        <Button Grid.Row="0" Margin="10" IsEnabled="{Binding IsConnected}" FontSize="24" Height="39.5" Content="Connect">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="Click">
                     <prism:InvokeCommandAction Command="{Binding ConnectCommand}" />
                 </i:EventTrigger>
             </i:Interaction.Triggers>
-            Connect
         </Button>
 
         <UserControl Grid.Row="1" Padding="10">
@@ -39,308 +40,387 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="300"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="Sensor Kit" Style="{StaticResource ModuleTitle}"/>
-                    <materialDesign:Card Grid.Row="1"
-                           Margin="10"
-                           Padding="10">
+                    <TextBlock Text="IO-LINK TECHNOLOGY" Style="{StaticResource ModuleTitle}"/>
+
+                    <materialDesign:Card Grid.Row="1" Margin="10 0 10 10">
                         <Grid>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
+                                <RowDefinition/>
+                                <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="130"/>
-                                <ColumnDefinition Width="460"/>
-                                <ColumnDefinition Width="130"/>
-                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="1.5*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
 
-                            <TextBlock Style="{StaticResource ModuleTitle}" Text="IO-Link Inputs"/>
-                            <Grid Grid.Row="1" Grid.Column="0" >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="105" />
-                                    <RowDefinition Height="105" />
-                                    <RowDefinition Height="105"/>
-                                </Grid.RowDefinitions>
-
-                                <Border Grid.Row="0" Margin="10 " Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="O5D150" Style="{StaticResource FieldTitle}"/>
-                                        <TextBlock Text="Distance" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding DEVICE_O5D_150, StringFormat=N2}"/>
-                                            <TextBlock Text=" mm"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-             State="{Binding DEVICE_O5D_150_Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Row="1" Margin="10 " Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="KI6000" Style="{StaticResource FieldTitle}"/>
-                                        <TextBlock Text="Distance" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding DEVICE_KI6000, StringFormat=N2}"/>
-                                            <TextBlock Text=" mm"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-State="{Binding DEVICE_KI6000_Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <!--<Border Grid.Row="1" Margin="10" Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="KI6000" Style="{StaticResource FieldTitle}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-                                                    State="{Binding IF6123Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>-->
-                                <Border Grid.Row="2" Margin="10" Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="UGT524" Style="{StaticResource FieldTitle}"/>
-                                        <TextBlock Text="Distance" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding DEVICE_UGT_524}"/>
-                                            <!--, StringFormat=N3-->
-                                            <TextBlock Text=" mm"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-                                                    State="{Binding DEVICE_UGT_524_Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                            </Grid>
-
-                            <Image  Grid.Row="1" Margin="0 20 0 0" Grid.Column="1"  Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\IO_6.png"/>
-                            <Grid Grid.Row="1" Grid.Column="2" Margin="0 0 -10 0" >
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="120" />
-                                    <RowDefinition Height="80"  />
-                                    <RowDefinition Height="80"/>
-                                </Grid.RowDefinitions>
-
-                                <Border Grid.Row="0" Margin="10 20 10 10 " Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="RPV150" Style="{StaticResource FieldTitle}"/>
-                                        <TextBlock Text="Pulses count" HorizontalAlignment="Center"/>
-                                        <TextBlock Text="{Binding DEVICE_RPV_510}" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-State="{Binding DEVICE_RPV_510_Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Row="1" Margin="10 15 10 10" Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="OGT500" Style="{StaticResource FieldTitle}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-                        State="{Binding DEVICE_OGT_500_Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-                                <Border Grid.Row="2" Margin="10 15 10 10" Style="{StaticResource Frame}">
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="IGS232" Style="{StaticResource FieldTitle}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5"
-State="{Binding DEVICE_IGS_232_Status, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-
-                            </Grid>
-                            <Border VerticalAlignment="Bottom" Margin="30,0,0,25" HorizontalAlignment="Left"  Grid.Row="1" Style="{StaticResource Frame}"
-Padding="5" Grid.Column="1"
->
-                                <StackPanel Orientation="Vertical">
-                                    <TextBlock Style="{StaticResource FieldTitle}" Text="Indicator Lights"/>
-                                    <StackPanel Orientation="Horizontal">
-                                        <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
+                                <Grid Grid.Column="0">
+                                    <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\al2330 (3).png" 
+                                       Height="300" 
+                                       Margin="-260 50 0 0"/>
+                                    <Border VerticalAlignment="top"  
+                                            HorizontalAlignment="Right" 
+                                            Style="{StaticResource Frame}"
+                                            Margin="0 15 215 0"
+                                            Padding="5">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Style="{StaticResource FieldTitle}" Text="Indicator Lights"/>
+                                            <StackPanel Orientation="Horizontal">
+                                                <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
                           State="{Binding DEN_DO_IFM, Mode=TwoWay}"/>
-                                        <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
+                                                <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
                           State="{Binding DEN_VANG_IFM, Mode=TwoWay}"/>
-                                        <components:Indicator Width="23" Height="23" Margin="5" 
+                                                <components:Indicator Width="23" Height="23" Margin="5" 
                           State="{Binding DEN_XANH_IFM, Mode=TwoWay}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+
+                                    <Ellipse x:Name="Circle" 
+                                             Stroke="Black" 
+                                             Height="100" 
+                                             Width="100" 
+                                             StrokeThickness="1" 
+                                             VerticalAlignment="Bottom"
+                                             HorizontalAlignment="Right"
+                                             Margin="0 0 0 50"
+                                             Fill="#bf9100"/>
+                                    <components:Indicator Width="20" 
+                                                          Height="20"  
+                                                          VerticalAlignment="Bottom"
+                                                          HorizontalAlignment="Right"
+                                                          Margin="0 0 78 90"
+                                                          State="{Binding DEVICE_IGS_232_Status, Mode=TwoWay}"/>
+                                    <components:Indicator   Width="20" 
+                                                            Height="20"  
+                                                            VerticalAlignment="Bottom"
+                                                            HorizontalAlignment="Right"
+                                                            Margin="0 0 40 128"
+                                                            State="{Binding DEVICE_OGT_500_Status, Mode=TwoWay}" Loaded="Indicator_Loaded_1"/>
+                                    <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\ogt500_3d.PNG" 
+                                           Height="120" 
+                                           VerticalAlignment="Top"
+                                           HorizontalAlignment="Left" Margin="376,122,0,0"
+                                    
+                                           >
+                                        <Image.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="0"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Image.RenderTransform>
+                                    </Image>
+
+                                    <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\igs_232.png"
+                                           Height="80"
+                                           VerticalAlignment="Bottom"
+                                           HorizontalAlignment="Right"
+                                           Margin="0,0,92,58">
+
+                                    </Image>
+                                    <TextBlock Grid.Row="0"
+                                               Text="OGT500"  
+                                               Style="{StaticResource FieldTitle}" Margin="376,100,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                                    <TextBlock Grid.Row="0"
+                                                Text="IGS232"  
+                                                Style="{StaticResource FieldTitle}" Margin="219,323,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" RenderTransformOrigin="0.156,0.639"/>
+
+
+                                </Grid>
+
+                                <Grid Grid.Column="1" Margin="0,0,0,-36">
+                                    <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\ugt_524.PNG" 
+                                           VerticalAlignment="Bottom"
+                                           HorizontalAlignment="Left"                                          
+                                           Height="120" Margin="62,0,0,75" >
+
+                                    </Image>
+                                    <Ruler:Ruler100_doc HorizontalAlignment="Left"  
+                                                        VerticalAlignment="Top" Margin="93,2,0,0" 
+                                                        />
+                                    <Slider Maximum="100" Width="214" Minimum="0" Value="{Binding DEVICE_UGT_524,Mode=OneWay}" Margin="81,220,5,-219" 
+                                           >
+                                        <Slider.RenderTransform>
+                                            <TransformGroup>
+                                                <ScaleTransform/>
+                                                <SkewTransform/>
+                                                <RotateTransform Angle="-90"/>
+                                                <TranslateTransform/>
+                                            </TransformGroup>
+                                        </Slider.RenderTransform>
+                                    </Slider>
+                                    <Border Height="85" Width="80"  Style="{StaticResource Frame}" Margin="120,266,100,89">
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="UGT524" Style="{StaticResource FieldTitle}"/>
+                                            <TextBlock Text="Distance" HorizontalAlignment="Center"/>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding DEVICE_UGT_524}"/>
+                                                <!--, StringFormat=N3-->
+                                                <TextBlock Text=" mm"/>
+                                            </StackPanel>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
+                                                <components:Indicator Width="23" Height="23" Margin="5"
+                                                    State="{Binding DEVICE_UGT_524_Status, Mode=TwoWay}"/>
+                                            </StackPanel>
+                                        </StackPanel>
+                                    </Border>
+                                </Grid>
+                            </Grid>
+                        </Grid>
+                    </materialDesign:Card>
+                    <materialDesign:Card  Grid.Row="2" Margin="10">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="43*"/>
+                                <ColumnDefinition Width="107*"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\vitme rockwell.png" 
+                                    Height="130"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="86,125,0,0" Grid.ColumnSpan="2"/>
+                            <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\rvp510_3d.PNG" 
+                                    Height="130"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Top"
+                                    Margin="377,133,0,0" RenderTransformOrigin="0.5,0.5" Grid.Column="1">
+
+                            </Image>
+                            <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\o5d150_3d.PNG" 
+                                   Height="120"
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Top"
+                                    RenderTransformOrigin="0.5,0.5" Margin="10,162,0,0">
+                                <Image.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="-180"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Image.RenderTransform>
+                            </Image>
+                            <Image Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\KI6000_3d.jpg" 
+                                   Height="180" RenderTransformOrigin="0.508,0.656" Margin="-122,-11,122,131" Grid.ColumnSpan="2">
+
+                            </Image>
+                            <Border Height="85"
+                                    Width="100" 
+                                    Grid.Row="0" 
+                                    Style="{StaticResource Frame}" Margin="16,8,67,162" 
+                                    >
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="O5D150" Style="{StaticResource FieldTitle}"/>
+                                    <TextBlock Text="Distance" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="{Binding DEVICE_O5D_150, StringFormat=N2}"/>
+                                        <TextBlock Text=" mm"/>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
+                                        <components:Indicator Width="23" Height="23" Margin="5"
+             State="{Binding DEVICE_O5D_150_Status, Mode=TwoWay}"/>
+                                    </StackPanel>
+                                </StackPanel>
+                            </Border>
+                            <Border  Height="85" Width="100" Grid.Row="0"  Style="{StaticResource Frame}" Grid.Column="1" Margin="383,8,10,186" >
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock Text="RPV150" Style="{StaticResource FieldTitle}"/>
+                                    <TextBlock Text="Pulses count" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{Binding DEVICE_RPV_510}" HorizontalAlignment="Center"/>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <TextBlock Text="Status" VerticalAlignment="Center" Margin="5"/>
+                                        <components:Indicator Width="23" Height="23" Margin="5"
+State="{Binding DEVICE_RPV_510_Status, Mode=TwoWay}"/>
                                     </StackPanel>
                                 </StackPanel>
                             </Border>
 
+                            <components:Indicator   Width="16" 
+                        Height="14"  
+                       
+                        VerticalAlignment="Bottom"
+                        HorizontalAlignment="Right"                   
+                        State="{Binding DEVICE_KI6000_Status, Mode=TwoWay}" Grid.Column="1" Margin="0,0,445,137" Loaded="Indicator_Loaded" RenderTransformOrigin="1.533,3.136" />
+                            <TextBlock Grid.Row="0"
+            Text="KI6000"  
+            Style="{StaticResource FieldTitle}" Grid.Column="1" HorizontalAlignment="Left" Margin="69,10,0,0" VerticalAlignment="Top" />
+                            <Ruler:Ruler Grid.Column="1" HorizontalAlignment="Left"  VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5" Margin="153,194,0,0" >
+                                <Ruler:Ruler.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform/>
+                                        <SkewTransform/>
+                                        <RotateTransform Angle="90"/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Ruler:Ruler.RenderTransform>
+                            </Ruler:Ruler>
+                            <Slider Maximum="19" Minimum="7" Value="{Binding DEVICE_O5D_150,Mode=OneWay }" Margin="116,190,292,-152" Grid.ColumnSpan="2" />
                         </Grid>
                     </materialDesign:Card>
-
-                    <Grid Grid.Row="2">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="350"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-
-
-                    </Grid>
                 </Grid>
                 <Grid Grid.Column="1">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
-                        <RowDefinition Height="AUTO"/>
+                        <RowDefinition Height="265"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
-                    <TextBlock Text="PLC Kit" Grid.Row="0" Style="{StaticResource ModuleTitle}"/>
-                    <materialDesign:Card Grid.Row="1" Padding="10" Margin="10">
+                    <TextBlock Text="TRAFFIC" Grid.Row="0" Style="{StaticResource ModuleTitle}"/>
+                    <materialDesign:Card Grid.Row="3" Margin="10 0 10 10">
+                    
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                                <RowDefinition Height="auto"/>
-                            </Grid.RowDefinitions>
-
-                            <!--<lvc:CartesianChart Grid.Row="1" AnimationsSpeed="0:0:0.5" Hoverable="False" DataTooltip="{x:Null}">
-                                <lvc:CartesianChart.Series>
-                                    <lvc:LineSeries Values="{Binding ChartValues, UpdateSourceTrigger=PropertyChanged}" 
-                                                      PointGeometry="{x:Null}" 
-                                                      LineSmoothness="1"
-                                                      StrokeThickness="6" 
-                                                      Stroke="#F34336"
-                                                      Fill="Transparent"/>
-                                </lvc:CartesianChart.Series>
-                                <lvc:CartesianChart.AxisX>
-                                    <lvc:Axis LabelFormatter="{Binding DateTimeFormatter, UpdateSourceTrigger=PropertyChanged}" 
-                                                MaxValue="{Binding AxisMax}" 
-                                                MinValue="{Binding AxisMin}"
-                                                Unit="{Binding AxisUnit}">
-                                        <lvc:Axis.Separator>
-                                            <lvc:Separator Step="{Binding AxisStep}" />
-                                        </lvc:Axis.Separator>
-                                    </lvc:Axis>
-                                </lvc:CartesianChart.AxisX>
-                            </lvc:CartesianChart>-->
-                            <TextBlock Grid.Row="0"
-Text="Inverter"  HorizontalAlignment="Left"
-Style="{StaticResource ModuleTitle}"/>
-                            <StackPanel Orientation="Horizontal" Grid.Row="3"
-HorizontalAlignment="Center">
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-        Padding="5"
-        Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="120">
-                                        <TextBlock Text="Motor Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <components:Indicator Width="23" Height="23" Margin="5" 
-                                  State="{Binding ButtonStartup, Mode=TwoWay}"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Red"
-                                  State="{Binding ButtonStop, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                                            <Button Margin="5" Content="ON" Padding="0" Width="35" Height="20" Grid.Column="2" Grid.Row="0">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding Start_Inverter_Command}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
-                                            <Button Margin="5" Content="OFF" Padding="0" Width="35" Height="20" Grid.Column="3" Grid.Row="0">
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding Stop_Inverter_Command}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Row="0">
 
 
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-Padding="5"
-Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="120">
-                                        <TextBlock Text="Motor Direction" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="5"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <components:Indicator Width="23" Height="23" Margin="5"  OnColor="Yellow"
-                          State="{Binding MotorForward, Mode=TwoWay}"/>
-                                            <components:Indicator Width="23" Height="23" Margin="5" OnColor="Yellow"
-                          State="{Binding MotorReverse, Mode=TwoWay}"/>
-                                        </StackPanel>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
-                                            <Button   Padding="0" Width="60" Height="30" Grid.Column="2" Grid.Row="0">
-                                                <materialDesign:PackIcon Kind="SwapHorizontalBold" Height="24" Width="24" />
-                                                <i:Interaction.Triggers>
-                                                    <i:EventTrigger EventName="Click">
-                                                        <prism:InvokeCommandAction Command="{Binding Forward_Inverter_Command}" />
-                                                    </i:EventTrigger>
-                                                </i:Interaction.Triggers>
-                                            </Button>
+                                <Border Height="270" 
+              Width="230" 
+              Grid.Row="1" 
+              Style="{StaticResource Frame}"
+              Padding="5"
+              VerticalAlignment="Top"
+              HorizontalAlignment="Left"
+              Margin="10"
+              >
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock Text="CONTROL" Style="{StaticResource FieldTitle}"/>
+                                        <Grid Grid.Row="1" Margin="5">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <StackPanel Grid.Column="0"
+>
+                                                <Button Margin="5" Content="START" Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding Start_Inverter_Command}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Margin="5" Content="STOP" Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding Stop_Inverter_Command}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                                <Button Margin="5"  Padding="0" Width="90" Height="20" Grid.Column="3" Grid.Row="0">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding Forward_Inverter_Command}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                    <materialDesign:PackIcon Kind="SwapHorizontalBold" Height="24" Width="24" VerticalAlignment="Center" RenderTransformOrigin="1.391,0.786" />
+                                                </Button>
 
-                                        </StackPanel>
-                                    </StackPanel>
-                                </Border>
-
-                                <Border Grid.Row="1" Style="{StaticResource Frame}"
-        Padding="5"
-                                                          
-        Margin="10">
-                                    <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                        <TextBlock Text="Motor" Style="{StaticResource FieldTitle}"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <StackPanel Margin="0,0,10,0">
-                                                <TextBlock Text="Write Setpoint" HorizontalAlignment="Center"/>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBox Margin="5 0" Width="30" TextAlignment="Center" Text="{Binding MotorsetpointWrite, Mode=TwoWay}" HorizontalAlignment="Center"/>
-                                                    <Button Margin="5 0" Content="OK" Padding="0" Width="35" Height="20">
-                                                        <i:Interaction.Triggers>
-                                                            <i:EventTrigger EventName="Click">
-                                                                <prism:InvokeCommandAction Command="{Binding Write_Setpoint_Command}" />
-                                                            </i:EventTrigger>
-                                                        </i:Interaction.Triggers>
-                                                    </Button>
+                                            </StackPanel>
+                                            <StackPanel Grid.Column="1">
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding Ready, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Ready" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding Active, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Active" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding Fwd, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Fwd" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding Rev, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Rev" HorizontalAlignment="Center"/>
+                                                </StackPanel>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <components:Indicator Grid.Row="3" Grid.Column="0" Width="15" Height="15" Margin="30 5 10 0" State="{Binding Error, Mode=TwoWay}"/>
+                                                    <TextBlock Margin="0 5 10 0" Grid.Row="2" Grid.Column="0" Text="Error" HorizontalAlignment="Center"/>
                                                 </StackPanel>
                                             </StackPanel>
-                                            <StackPanel Margin="10,0,0,0">
-                                                <TextBlock Text="Read Setpoint :" FontWeight="Bold"  HorizontalAlignment="Center"/>
-                                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                                    <TextBlock Text="{Binding Motorsetpoint, Mode=TwoWay}" HorizontalAlignment="Center"/>
-                                                    <TextBlock Text=" Hz"/>
-                                                </StackPanel>
+                                        </Grid>
+                                        <Grid Grid.Row="2" Margin="10">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition/>
+                                                <ColumnDefinition/>
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                                <RowDefinition/>
+                                            </Grid.RowDefinitions>
+                                            <TextBlock Text="Speed SP" Margin="10 10 10 0" HorizontalAlignment="Left"/>
+                                            <StackPanel Grid.Column="1" Margin="10 10 10 0" Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding Motorsetpoint, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text=" Hz"/>
                                             </StackPanel>
-                                        </StackPanel>
-
-
-
-                                        <TextBlock Text="Speed :" FontWeight="Bold" HorizontalAlignment="Center"/>
-                                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                                            <TextBlock Text="{Binding Speed, Mode=TwoWay}" HorizontalAlignment="Center"/>
-                                            <TextBlock Text=" Hz"/>
-                                        </StackPanel>
-                                    </StackPanel>
+                                            <TextBlock Text="Speed PV"  Grid.Column="0" Grid.Row="1" HorizontalAlignment="Left" Margin="10 10 10 0" />
+                                            <StackPanel Margin="10 10 10 0"  Grid.Column="1" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBlock Text="{Binding Speed, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                                <TextBlock Text=" Hz"/>
+                                            </StackPanel>
+                                            <TextBlock Grid.Column="0" Grid.Row="2" Margin="10 10 10 0"  Text="Write Setpoint" HorizontalAlignment="Left"/>
+                                            <StackPanel Grid.Column="1" Grid.Row="2" Margin="10 10 10 0" Orientation="Horizontal" HorizontalAlignment="Center">
+                                                <TextBox Margin="5 0" Width="30" TextAlignment="Center" Text="{Binding MotorsetpointWrite, Mode=TwoWay}" HorizontalAlignment="Center"/>
+                                                <Button Margin="5 0" Content="OK" Padding="0" Width="35" Height="20">
+                                                    <i:Interaction.Triggers>
+                                                        <i:EventTrigger EventName="Click">
+                                                            <prism:InvokeCommandAction Command="{Binding Write_Setpoint_Command}" />
+                                                        </i:EventTrigger>
+                                                    </i:Interaction.Triggers>
+                                                </Button>
+                                            </StackPanel>
+                                           
+                                        </Grid>
+                                    </Grid>
                                 </Border>
-                            </StackPanel>
+                            </Grid>
+
+                            <Grid Grid.Column="1" Height="390">
+                                <lvc:CartesianChart x:Name="chart" Grid.Row="1" AnimationsSpeed="0:0:0.5" Hoverable="False" DataTooltip="{x:Null}" >
+                                    <lvc:CartesianChart.Series>
+                                        <lvc:LineSeries Values="{Binding ChartValues}" 
+      PointGeometry="{x:Null}" 
+      LineSmoothness="1"
+      StrokeThickness="6" 
+      Stroke="#F34336"
+      Fill="Transparent"/>
+                                    </lvc:CartesianChart.Series>
+                                    <lvc:CartesianChart.AxisX>
+                                        <lvc:Axis LabelFormatter="{Binding DateTimeFormatter}" 
+MaxValue="{Binding AxisMax}" 
+MinValue="{Binding AxisMin}"
+Unit="{Binding AxisUnit}">
+                                            <lvc:Axis.Separator>
+                                                <lvc:Separator Step="{Binding AxisStep}" />
+                                            </lvc:Axis.Separator>
+                                        </lvc:Axis>
+                                    </lvc:CartesianChart.AxisX>
+                                </lvc:CartesianChart>
+                            </Grid>
                         </Grid>
                     </materialDesign:Card>
-                    <materialDesign:Card Grid.Row="3" Padding="10" Margin="10">
+                    <TextBlock Text="MOTOR" Margin="10" Grid.Row="2" Style="{StaticResource ModuleTitle}"/>
+                    <materialDesign:Card Grid.Row="1" Margin="10 0 10 10">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock Grid.Row="0"
-        Text="Traffic Lights" 
-         HorizontalAlignment="Left"
-        Style="{StaticResource ModuleTitle}"/>
+
                             <Grid Grid.Row="1">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
@@ -348,16 +428,16 @@ Margin="10">
                                 </Grid.ColumnDefinitions>
                                 <Grid Grid.Column="0" Width="600" Height="300" >
                                     <Image 
-Width="600"           
-VerticalAlignment="Center"
+Width="400"           
+VerticalAlignment="Top"
 HorizontalAlignment="Left"     
-Margin="-90,-10,0,0"
+Margin="40,27,0,0"
 Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1main\DemoCaseGui\Resources\Images\NGA4 (1).png"/>
                                     <Border 
   Height="35"                         
   HorizontalAlignment="Left"
   VerticalAlignment="Bottom"
-  Margin="65,0,0,95"
+  Margin="105,0,0,120"
   Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -377,7 +457,7 @@ Source="C:\Users\vu343\OneDrive - hcmut.edu.vn\Desktop\CaseGuiSiemens-Micro850-1
 Height="35"                         
 HorizontalAlignment="Right"
 VerticalAlignment="Top"
-Margin="0,85,270,0"
+Margin="0,70,245,0"
 Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -396,7 +476,7 @@ Style="{StaticResource Frame}">
   Width="35"
   HorizontalAlignment="Left"
   VerticalAlignment="Top"
-  Margin="130,20,0,0"
+  Margin="170,5,0,0"
   Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -409,26 +489,15 @@ Style="{StaticResource Frame}">
             State="{Binding XANH2, Mode=TwoWay}"/>
 
                                             </StackPanel>
-                                            
+
                                         </StackPanel>
                                     </Border>
-                                    <Border Margin="85 80 0 0" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Top">
-                                        <TextBlock Text="{Binding Display_2, Mode=TwoWay}"   Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                    </Border>
-                                    <Border Margin="120 0 0 50" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Left" VerticalAlignment="Bottom">
-                                        <TextBlock Text="{Binding Display_1, Mode=TwoWay}"  Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                    </Border>
-                                    <Border Margin="0 40 330 0" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Top">
-                                        <TextBlock Text="{Binding Display_1, Mode=TwoWay}"   Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                    </Border>
-                                    <Border Margin="0 0 290 90" Background="LightGray" Height="40" Width="40" CornerRadius="10" HorizontalAlignment="Right" VerticalAlignment="Bottom">
-                                        <TextBlock Text="{Binding Display_2, Mode=TwoWay}"   Style="{StaticResource FieldTitle}" FontWeight="Normal" />
-                                    </Border>
+
                                     <Border     
 Width="35"
 HorizontalAlignment="Right"
 VerticalAlignment="Bottom"
-Margin="0,0,335,30"
+Margin="0,0,310,55"
 Style="{StaticResource Frame}">
 
                                         <StackPanel Orientation="Vertical">
@@ -447,17 +516,17 @@ Style="{StaticResource Frame}">
 
                                 </Grid>
                                 <Grid Grid.Column="1">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition/>
-                                        <RowDefinition/>
-                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
                                     <Border Height="170"
                                             Width="250"
-                                            Grid.Row="0"
-                                            VerticalAlignment="Top"
+                                            Grid.Column="1"
+                                            VerticalAlignment="Center"
                             Style="{StaticResource Frame}"
 
-                            Margin="10" Grid.ColumnSpan="2"
+                            Margin="10 10 60 0" Grid.ColumnSpan="2"
 >
                                         <Grid >
 
@@ -541,11 +610,13 @@ Style="{StaticResource Frame}">
                                     </Border>
                                     <Border Width="110" 
                                                 Height="90"
-                                                     Grid.Row="1"
+                                                 Grid.Row="1"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
                                                 Style="{StaticResource Frame}"
                               
 
-Margin="10">
+>
                                         <StackPanel Orientation="Vertical" >
                                             <TextBlock Text="Status" Style="{StaticResource FieldTitle}" HorizontalAlignment="Center" Margin="10"/>
 

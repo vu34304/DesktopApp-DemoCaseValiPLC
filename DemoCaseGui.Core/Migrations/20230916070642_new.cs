@@ -27,6 +27,22 @@ namespace DemoCaseGui.Core.Migrations
                 {
                     table.PrimaryKey("PK_Inverter_LOG", x => x.id);
                 });
+            migrationBuilder.CreateTable(
+               name: "StepMotor_LOG",
+               columns: table => new
+               {
+                   id = table.Column<int>(type: "int", nullable: false)
+                       .Annotation("SqlServer:Identity", "1, 1"),
+                   _NAME = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: true),
+                   _NUMERICID = table.Column<int>(type: "int", nullable: true),
+                   _VALUE = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: true),
+                   _TIMESTAMP = table.Column<DateTime>(type: "datetime", nullable: false),
+                   _QUALITY = table.Column<int>(type: "int", nullable: true)
+               },
+               constraints: table =>
+               {
+                   table.PrimaryKey("PK_StepMotor_LOG", x => x.id);
+               });
 
             migrationBuilder.CreateTable(
                 name: "ValiCompact_LOG",
@@ -44,6 +60,7 @@ namespace DemoCaseGui.Core.Migrations
                 {
                     table.PrimaryKey("PK_ValiCompact_LOG", x => x.id);
                 });
+
 
             migrationBuilder.CreateTable(
                 name: "ValiIFM_LOG",
@@ -80,6 +97,23 @@ namespace DemoCaseGui.Core.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ValiMicro820_LOG",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    _NAME = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: true),
+                    _NUMERICID = table.Column<int>(type: "int", nullable: true),
+                    _VALUE = table.Column<string>(type: "varchar(64)", unicode: false, maxLength: 64, nullable: true),
+                    _TIMESTAMP = table.Column<DateTime>(type: "datetime", nullable: false),
+                    _QUALITY = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ValiMicro820_LOG", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ValiSiemens_LOG",
                 columns: table => new
                 {
@@ -111,6 +145,12 @@ namespace DemoCaseGui.Core.Migrations
 
             migrationBuilder.DropTable(
                 name: "ValiMicro_LOG");
+
+            migrationBuilder.DropTable(
+             name: "ValiMicro820_LOG");
+
+            migrationBuilder.DropTable(
+             name: "StepMotor_LOG");
 
             migrationBuilder.DropTable(
                 name: "ValiSiemens_LOG");

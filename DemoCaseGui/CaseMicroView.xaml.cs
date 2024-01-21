@@ -81,5 +81,16 @@ namespace DemoCaseGui
         {
 
         }
+
+        private void UserControl_Loaded(object sender, RoutedEventArgs e)
+        {
+            var viewmodel = (Core.Application.ViewModels.CaseMicroViewModel)DataContext;
+            viewmodel.ChartUpdate += Viewmodel_ChartUpdate;
+        }
+
+        private void Viewmodel_ChartUpdate()
+        {
+            Dispatcher.BeginInvoke(() => chart.Update(false, true), DispatcherPriority.Render);
+        }
     }
 }
